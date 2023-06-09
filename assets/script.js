@@ -12,3 +12,5 @@ daily.addEventListener("click", function () {
     }
   });
 });
+
+const generateMeal = function (meal) {};
