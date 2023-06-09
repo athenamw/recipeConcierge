@@ -3,13 +3,12 @@ const search = document.getElementById("#searchBtn");
 const daily = document.getElementById("daily");
 const randomDaily = document.getElementById("randomRecipe");
 
-daily.addEventListener("click", () => {
-  fetch(randomRecipeApi)
-    .then((res) => res.json())
-    .then((res) => {
-      var recipe = res.meals[0];
-      console.log(recipe);
-      console.log(recipe.strMeal);
-      console.log(recipe.strMealThumb);
-    });
+daily.addEventListener("click", function () {
+  fetch(randomRecipeApi).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data.meals);
+      });
+    }
+  });
 });
