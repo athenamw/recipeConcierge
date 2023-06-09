@@ -7,6 +7,9 @@ daily.addEventListener("click", () => {
   fetch(randomRecipeApi)
     .then((res) => res.json())
     .then((res) => {
-      console.log(res.meals[0]);
+      var recipe = res.meals[0];
+      console.log(recipe);
+      console.log(recipe.strMeal);
+      console.log(recipe.strMealThumb);
     });
 });
