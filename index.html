@@ -27,22 +27,27 @@
 
     <!-- Random Recipe -->
     <section class="container">
-      <h2 class="title is-1">Recipe of the day</h2>
+      <h2 class="title is-1 columns is-centered">Recipe of the day</h2>
       <!-- Random recipe button -->
-      <button id="daily" class="button is-link is-light">
+      <button id="daily" class="button is-link is-light m-4">
         Click here to get a random recipe!
       </button>
 
       <section id="randomRecipe" class="recipeCard">
-        <h2 id="recipeName" class="title is-2"></h2>
-        <img id="image" alt="Meal Photograph" />
+        <h2 id="recipeName" class="title is-2 columns is-centered m-4"></h2>
+        <img
+          id="image"
+          class="image is-offset-one-half"
+          alt="Meal Photograph"
+        />
         <section id="ingredients"></section>
         <section id="instructions">
-          <h2 class="title is-2">Instructions</h2>
+          <h2 class="title is-2 columns is-centered">Instructions</h2>
           <p id="instructionsText"></p>
         </section>
       </section>
     </section>
+
     <!-- <iframe
       width="420"
       height="315"
