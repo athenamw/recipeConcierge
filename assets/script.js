@@ -1,42 +1,48 @@
 const randomRecipeApi = "https://www.themealdb.com/api/json/v1/1/random.php";
-const search = document.getElementById("#searchBtn");
+const search = document.getElementById("searchBtn");
 const dailyBtn = document.getElementById("daily");
 const randomDaily = document.getElementById("randomRecipe");
 var recipeName = document.getElementById("recipeName");
 var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
-
+var instructions = document.getElementById("instructionsText");
 function getRandomRecipe() {
+  // added this innerHTML because ingredients were not clearing on button clicks. Now refreshes to current recipe
   ingredients.innerHTML = "Ingredients";
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data.meals);
         var recipe = data.meals[0];
-        console.log(recipe);
         recipeName.textContent = recipe.strMeal;
         img.src = recipe.strMealThumb;
         var ingredientList = recipe.strMeasure;
         var measure = recipe.strIngredient;
-        console.log(measure);
+        // loop for getting the measurement and the ingredients paired up
         for (let i = 1; i <= 20; i++) {
           var ingredientKey = "strIngredient" + i;
           var ingredientValue = recipe[ingredientKey];
           console.log(ingredientValue);
           var measureKey = "strMeasure" + i;
           var measureValue = recipe[measureKey];
-          console.log(measureValue);
-
+          // displays the values under the photo
           if (ingredientValue && measureValue) {
             ingredients.innerHTML += `<p>${measureValue} of ${ingredientValue}</p>`;
           }
         }
+        // added replace all because the instructions were running together
+        var recipeInstructions = recipe.strInstructions.replaceAll(
+          "\r\n",
+          "<br>"
+        );
+        // displays the instructions under the ingredients
+        instructions.innerHTML = recipeInstructions;
       });
     }
   });
 }
-
+// generates random recipe on page load
 window.addEventListener("load", getRandomRecipe);
+// generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
 const generateMeal = function (meal) {};
