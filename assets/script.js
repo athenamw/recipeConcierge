@@ -6,9 +6,11 @@ var recipeName = document.getElementById("recipeName");
 var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
+
 function getRandomRecipe() {
   // added this innerHTML because ingredients were not clearing on button clicks. Now refreshes to current recipe
-  ingredients.innerHTML = "Ingredients";
+  ingredients.innerHTML = `<h2>Ingredients</h2>`;
+  ingredients.firstChild.classList.add("title", "is-2"); // only applies to h2 which is the first child
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
