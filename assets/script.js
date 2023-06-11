@@ -62,7 +62,7 @@ var getSearchresults = function() {
   .then(function(response) {
     if (response.ok){
       response.json().then(function(data) {
-        console.log(data);
+        displayData(data);
 
       });
       //will run if it cant call the api
@@ -77,6 +77,20 @@ var getSearchresults = function() {
   //console logs th user input
   console.log(input);
 };
+
+function displayData(data){
+console.log(data);
+let data_div = document.getElementById("data");
+let meals_div = document.createElement("div");
+for (let i = 0; i< data.meals.length; i++) {
+  let meal_div = document.createElement("div");
+  meal_div.innerHTML = data.meals[i].strMeal;
+  meals_div.append(meal_div);
+  
+}
+console.log(meals_div);
+data_div.append(meals_div);
+}
 
 search.addEventListener("click", function (){
 getSearchresults();
