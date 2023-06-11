@@ -28,5 +28,63 @@
       src="https:\\www.youtube.com\embed\5ZYWVQ8imVA"
     >
     </iframe>
+    <div id="recipes">
+      <ul>
+        <li><a href="#">Recipe 1</a></li>
+        <li><a href="#">Recipe 2</a></li>
+        <li><a href="#">Recipe 3</a></li>
+      </ul>
+    </div>
+    <div id="favoriteRecipes"></div>
+    <script>
+      // Get the recipes from the server
+      var recipes = fetch("recipes.json").then(response => response.json());
+      // Add a listener to the "Add to Favorites" button
+      document.querySelectorAll("button[onclick*='addFavoriteRecipe']").forEach(button => {
+        button.onclick = function() {
+          // Get the recipeId from the button
+          var recipeId = this.dataset.recipeId;
+          // Add the recipe to the favorites list
+          addFavoriteRecipe(recipeId);
+        };
+      });
+      
+      // Add a listener to the "Remove from Favorites" button
+      document.querySelectorAll("button[onclick*='removeFavoriteRecipe']"); forEach(button => {
+        button.onclick = function() {
+          // Get the recipeId from the button
+          var recipeId = this.dataset.recipeId;
+          // Remove the recipe from the favorites list
+          removeFavoriteRecipe(recipeId);
+        };
+      });
+      // Get the favorites list from local storage
+      var favoriteRecipes = localStorage.getItem("favoriteRecipe");
+      // If the favorite list is not empty, then display it
+      if (favoriteRecipes !== null) {
+        var favoriteRecipesList = JSON.parse(favoriteRecipes);
+        var favoriteRecipesDiv = document.getElementById("favoriteRecipes");
+        favoriteRecipesDiv.innerHTML = favoriteRecipesList.map(recipe => '<li><a href="#">${recipe}<a/><li>').join("");
+      }
+      // Function to add recipe to the favorites list
+      function addFavoriteRecipe(recipeId) {
+        // Check to see if the recipe is already in the favorites list
+        if (favoriteRecipes === null || favoriteRecipes.indexOf(recipeId) === -1) {
+          // Since the recipe is not in the favorites list then add it
+          favoriteRecipes = favoriteRecipes || [];
+          favoriteRecipes.push(recipeId);
+          localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
+        }
+      }
+      // Function to remove recipe from the favorites list
+      function removeFavoriteRecipe(recipeId) {
+        // Check to see if the recipe is already in the favorites list
+        if (favoriteRecipes !== null && favoriteRecipes.indexOf(recipeId) !== -1) {
+          // Since the recipe is in the favorites list, then remove it
+          favoriteRecipes = favoriteRecipes.filter(id => id !== recipeId);
+          localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
+        }
+      }
+    </script>
   </body>
 </html>
