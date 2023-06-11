@@ -4,87 +4,52 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <script src="./assets/script.js" async></script>
+    <link rel="stylesheet" href="./assets/custom.css" />
+
     <title>Recipe Concierge</title>
   </head>
   <body>
     <header>Recipe Concierge</header>
     <section>
       <input type="text" id="searchText" />
-      <button id="searchBtn">Search</button>
+      <button id="searchBtn" class="button is-link is-light">Search</button>
     </section>
+
+    <!-- Random Recipe -->
     <section class="container">
-      <h2>Recipe of the day</h2>
-      <button id="daily">Click here to get a random recipe!</button>
-      <section id="randomRecipe"></section>
+      <h2 class="title is-1">Recipe of the day</h2>
+      <!-- Random recipe button -->
+      <button id="daily" class="button is-link is-light">
+        Click here to get a random recipe!
+      </button>
+
+      <section id="randomRecipe" class="recipeCard">
+        <h2 id="recipeName" class="title is-2"></h2>
+        <img id="image" alt="Meal Photograph" />
+        <section id="ingredients"></section>
+        <section id="instructions">
+          <h2 class="title is-2">Instructions</h2>
+          <p id="instructionsText"></p>
+        </section>
+      </section>
     </section>
-    <iframe
+    <!-- <iframe
       width="420"
       height="315"
-      src="https:\\www.youtube.com\embed\5ZYWVQ8imVA"
-    >
+      src="https:\\www.youtube.com\embed\5ZYWVQ8imVA">
     </iframe>
-    <div id="recipes">
-      <ul>
-        <li><a href="#">Recipe 1</a></li>
-        <li><a href="#">Recipe 2</a></li>
-        <li><a href="#">Recipe 3</a></li>
-      </ul>
-    </div>
-    <div id="favoriteRecipes"></div>
-    <script>
-      // Get the recipes from the server
-      var recipes = fetch("recipes.json").then(response => response.json());
-      // Add a listener to the "Add to Favorites" button
-      document.querySelectorAll("button[onclick*='addFavoriteRecipe']").forEach(button => {
-        button.onclick = function() {
-          // Get the recipeId from the button
-          var recipeId = this.dataset.recipeId;
-          // Add the recipe to the favorites list
-          addFavoriteRecipe(recipeId);
-        };
-      });
-      
-      // Add a listener to the "Remove from Favorites" button
-      document.querySelectorAll("button[onclick*='removeFavoriteRecipe']"); forEach(button => {
-        button.onclick = function() {
-          // Get the recipeId from the button
-          var recipeId = this.dataset.recipeId;
-          // Remove the recipe from the favorites list
-          removeFavoriteRecipe(recipeId);
-        };
-      });
-      // Get the favorites list from local storage
-      var favoriteRecipes = localStorage.getItem("favoriteRecipe");
-      // If the favorite list is not empty, then display it
-      if (favoriteRecipes !== null) {
-        var favoriteRecipesList = JSON.parse(favoriteRecipes);
-        var favoriteRecipesDiv = document.getElementById("favoriteRecipes");
-        favoriteRecipesDiv.innerHTML = favoriteRecipesList.map(recipe => '<li><a href="#">${recipe}<a/><li>').join("");
-      }
-      // Function to add recipe to the favorites list
-      function addFavoriteRecipe(recipeId) {
-        // Check to see if the recipe is already in the favorites list
-        if (favoriteRecipes === null || favoriteRecipes.indexOf(recipeId) === -1) {
-          // Since the recipe is not in the favorites list then add it
-          favoriteRecipes = favoriteRecipes || [];
-          favoriteRecipes.push(recipeId);
-          localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
-        }
-      }
-      // Function to remove recipe from the favorites list
-      function removeFavoriteRecipe(recipeId) {
-        // Check to see if the recipe is already in the favorites list
-        if (favoriteRecipes !== null && favoriteRecipes.indexOf(recipeId) !== -1) {
-          // Since the recipe is in the favorites list, then remove it
-          favoriteRecipes = favoriteRecipes.filter(id => id !== recipeId);
-          localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
-        }
-      }
-    </script>
+    <div id="0"></div>
+    </iframe> -->
+    <script src="./assets/script.js" async></script>
   </body>
 </html>
