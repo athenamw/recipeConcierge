@@ -57,48 +57,47 @@ dailyBtn.addEventListener("click", getRandomRecipe);
 
 const generateMeal = function (input) {};
 
-var getSearchresults = function() {
+var getSearchresults = function () {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
 
   //localStorage.setItem("searchText",input);
 
-  var mainSearchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
+  var mainSearchApi =
+    "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
   //calls the api
   fetch(mainSearchApi)
-  .then(function(response) {
-    if (response.ok){
-      response.json().then(function(data) {
-        displayData(data);
-
-      });
-      //will run if it cant call the api
-    } else {
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayData(data);
+        });
+        //will run if it cant call the api
+      } else {
+        console.log("error");
+      }
+    })
+    //will run if it cant connect to the server
+    .catch(function (error) {
       console.log("error");
-    }
-  })
-  //will run if it cant connect to the server
-  .catch(function(error) {
-    console.log("error");
-  });
+    });
   //console logs th user input
   console.log(input);
 };
 
-function displayData(data){
-console.log(data);
-let data_div = document.getElementById("data");
-let meals_div = document.createElement("div");
-for (let i = 0; i< data.meals.length; i++) {
-  let meal_div = document.createElement("div");
-  meal_div.innerHTML = data.meals[i].strMeal;
-  meals_div.append(meal_div);
-  
-}
-console.log(meals_div);
-data_div.append(meals_div);
+function displayData(data) {
+  console.log(data);
+  let data_div = document.getElementById("data");
+  let meals_div = document.createElement("div");
+  for (let i = 0; i < data.meals.length; i++) {
+    let meal_div = document.createElement("div");
+    meal_div.innerHTML = data.meals[i].strMeal;
+    meals_div.append(meal_div);
+  }
+  console.log(meals_div);
+  data_div.append(meals_div);
 }
 
-search.addEventListener("click", function (){
-getSearchresults();
+search.addEventListener("click", function () {
+  getSearchresults();
 });

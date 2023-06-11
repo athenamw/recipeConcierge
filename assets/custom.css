@@ -2,3 +2,21 @@
   font-family: "Lobster", cursive;
   font-family: "Playfair Display", serif;
 }
+
+.displayedContent {
+  background-image: url(./backgroundFood.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#ingredients {
+  margin-top: 5%;
+}
+
+.button {
+  justify-content: center;
+}
+
+.image {
+  justify-content: center;
+}

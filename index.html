@@ -19,37 +19,45 @@
     <title>Recipe Concierge</title>
   </head>
   <body>
-    <section class="bg-img"></section>
-    <header>Recipe Concierge</header>
-    <section>
-      <input type="text" id="searchText" />
-      <button id="searchBtn" class="button is-link is-light">Search</button>
-    </section>
+    <section id="displayedContent" class="displayedContent">
+      <header class="header title is-1 columns is-centered">
+        Recipe Concierge
+      </header>
+      <section>
+        <input type="text" id="searchText" />
+        <button id="searchBtn" class="button is-link is-light">Search</button>
+      </section>
 
-    <!-- Random Recipe -->
-    <section class="container">
-      <h2 class="title is-1 columns is-centered">Recipe of the day</h2>
-      <!-- Random recipe button -->
-      <button id="daily" class="button is-link is-light m-4">
-        Click here to get a random recipe!
-      </button>
+      <!-- Random Recipe -->
+      <section class="container">
+        <h2 class="title is-2 columns is-centered">Recipe of the day</h2>
+        <!-- Random recipe button -->
+        <button id="daily" class="button is-link is-light m-4">
+          Click here to get a random recipe!
+        </button>
 
-      <section id="randomRecipe" class="recipeCard">
-        <h2 id="recipeName" class="title is-2 columns is-centered m-4"></h2>
-        <img
-          id="image"
-          class="image is-offset-one-half"
-          alt="Meal Photograph"
-        />
-        <section id="ingredients"></section>
-        <section id="instructions">
-          <h2 class="title is-2 columns is-centered">Instructions</h2>
-          <p id="instructionsText"></p>
+        <section id="randomRecipe" class="recipeCard">
+          <h2 id="recipeName" class="title is-3 columns is-centered m-4"></h2>
+          <img
+            id="image"
+            class="image is-offset-one-half"
+            alt="Meal Photograph"
+          />
+          <section
+            id="ingredients"
+            class="ingredientFont has-text-weight-bold"
+          ></section>
+          <section
+            id="instructions"
+            class="instructionsFont has-text-weight-bold"
+          >
+            <h2 class="title is-3 columns is-centered mb-6">Instructions</h2>
+            <p id="instructionsText"></p>
+          </section>
         </section>
       </section>
-    </section>
 
-    <!-- <iframe
+      <!-- <iframe
       width="420"
       height="315"
       src="https:\\www.youtube.com\embed\5ZYWVQ8imVA">
@@ -59,13 +67,11 @@
 
     </iframe> -->
 
-        <!-- search information will be display in this div -->
-        <div id="data" class="data">
-          <div id="">
-    
-          </div>
-        </div>
-    <script src="./assets/script.js" async></script>
-
+      <!-- search information will be display in this div -->
+      <div id="data" class="data">
+        <div id=""></div>
+      </div>
+      <script src="./assets/script.js" async></script>
+    </section>
   </body>
 </html>
