@@ -35,29 +35,48 @@
         <button id="daily" class="button is-link is-light m-4">
           Click here to get a random recipe!
         </button>
-
-        <section id="randomRecipe" class="recipeCard">
-          <h2 id="recipeName" class="title is-3 columns is-centered m-4"></h2>
+        <section class="card" data-meal-num="">
+          <h2 id="recipeName" class="title is-3 columns is-centered m-4 $card-header-background-color"></h2>
+          
           <section>
-            <img id="image" class="image" alt="Meal Photograph" />
+          <section class="card-image">
+            <a class="button is-link is-light m-4">Like</a>
+            
+           
+              <!-- <button class="button button-like">
+                <i class="fa fa-heart"></i>
+                <span>Like</span>
+              </button> -->
+            <!-- </figure> -->
           </section>
-          <section
-            id="ingredients"
-            class="ingredientFont has-text-weight-bold has-text-black-bis is-size-5"
-          ></section>
-          <section
-            id="instructions"
-            class="instructionsFont has-text-weight-bold is-size-5"
-          >
-            <h2 class="title is-3 columns is-centered mb-6 has-text-black-bis">
-              Instructions
-            </h2>
-            <p
-              id="instructionsText"
-              class="instructionsText has-text-black-bis is-size-5"
-            ></p>
+          <section id="randomRecipe" class="recipeCard">
+            <section class="media">
+              <section class="media-left">                
+                  <img id="image" class="image" alt="Meal Photograph" />                
+              </section>
+              <section
+                id="ingredients"
+                class="ingredientFont has-text-weight-bold has-text-black-bis is-size-5"
+              ></section>
+            </section>
+
+            <section
+              id="instructions"
+              class="instructionsFont has-text-weight-bold is-size-5"
+            >
+              <h2
+                class="title is-3 columns is-centered mb-6 has-text-black-bis"
+              >
+                Instructions
+              </h2>
+              <p
+                id="instructionsText"
+                class="instructionsText has-text-black-bis is-size-5"
+              ></p>
+            </section>
           </section>
         </section>
+
       </section>
 
       <!-- <iframe
