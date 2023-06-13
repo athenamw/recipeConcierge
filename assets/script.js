@@ -56,14 +56,11 @@ window.addEventListener("load", getRandomRecipe);
 // generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
-// const generateMeal = function (input) {};
-
-var getSearchresults = function () {
+function getSearchresults() {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
 
   //localStorage.setItem("searchText",input);
-
   var mainSearchApi =
     "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
   //calls the api
@@ -84,7 +81,7 @@ var getSearchresults = function () {
     });
   //console logs th user input
   console.log(input);
-};
+}
 
 function displayData(data) {
   console.log(data);
