@@ -11,7 +11,15 @@ var instructions = document.getElementById("instructionsText");
 function getRandomRecipe() {
   // added this innerHTML because ingredients were not clearing on button clicks. Now refreshes to current recipe
   ingredients.innerHTML = `<h2>Ingredients</h2>`;
-  ingredients.firstChild.classList.add("title", "is-2"); // only applies to h2 which is the first child
+  // only applies to h2 which is the first child
+  ingredients.firstChild.classList.add(
+    "title",
+    "is-2",
+    "columns",
+    "is-centered",
+    "m-4",
+    "has-text-black-bis"
+  );
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
@@ -48,32 +56,32 @@ window.addEventListener("load", getRandomRecipe);
 // generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
-const generateMeal = function (input) {};
+// const generateMeal = function (input) {};
 
-var getSearchresults = function() {
+var getSearchresults = function () {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
 
   //localStorage.setItem("searchText",input);
 
-  var mainSearchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
+  var mainSearchApi =
+    "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
   //calls the api
   fetch(mainSearchApi)
-  .then(function(response) {
-    if (response.ok){
-      response.json().then(function(data) {
-        displayData(data);
-
-      });
-      //will run if it cant call the api
-    } else {
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayData(data);
+        });
+        //will run if it cant call the api
+      } else {
+        console.log("error");
+      }
+    })
+    //will run if it cant connect to the server
+    .catch(function (error) {
       console.log("error");
-    }
-  })
-  //will run if it cant connect to the server
-  .catch(function(error) {
-    console.log("error");
-  });
+    });
   //console logs th user input
   console.log(input);
 };
@@ -97,6 +105,6 @@ console.log(mealDiv);
 dataInfo.append(mealDiv);
 }
 
-search.addEventListener("click", function (){
-getSearchresults();
+search.addEventListener("click", function () {
+  getSearchresults();
 });
