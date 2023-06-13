@@ -56,6 +56,14 @@ window.addEventListener("load", getRandomRecipe);
 // generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
+$(function () {
+  $(".button-like").bind("click", function (event) {
+    $(".button-like").toggleClass("liked");
+  });
+});
+
+// const generateMeal = function (input) {};
+
 function getSearchresults() {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
