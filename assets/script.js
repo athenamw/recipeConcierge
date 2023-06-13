@@ -18,7 +18,7 @@ function getRandomRecipe() {
     "columns",
     "is-centered",
     "m-4",
-    "has-text-black-bis"
+    "has-text-warning-light"
   );
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
