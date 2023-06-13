@@ -71,7 +71,7 @@ var getSearchresults = function () {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayData(data);
+          displayTitle(data);
         });
         //will run if it cant call the api
       } else {
@@ -86,8 +86,8 @@ var getSearchresults = function () {
   console.log(input);
 };
 
-//will display the data when the user clicks the submit button
-function displayData(data){
+//will display the title when the user clicks the submit button
+function displayTitle(data){
 console.log(data);
 let dataInfo = document.getElementById("data");
 let mealDiv = document.createElement("div");
@@ -97,13 +97,40 @@ let mealDiv = document.createElement("div");
 for (let i = 0; i< data.meals.length; i++) {
   let mealName = document.createElement("div");
   
-  mealName.innerHTML = data.meals[i].strMeal;
+  mealName.textContent = data.meals[i].strMeal;
   mealDiv.append(mealName);
 }
-
 console.log(mealDiv);
 dataInfo.append(mealDiv);
 }
+
+function displayImage(data, event){
+  let mealDiv = document.createElement("section");
+  
+  // append the name to a new div
+  //need to add a class to each div
+  for (let i = 0; i< data.meals.length; i++) {
+    let mealName = document.createElement("section");
+    //mealName.id = "recipes" + i;
+    mealName.setAttribute("id", `recipes ${i}`);
+    console.log(mealName);
+  
+    mealName.textContent = data.meals[i].strMeal;
+    mealDiv.append(mealName);
+  }
+
+  console.log(mealDiv);
+  dataInfo.append(mealDiv);
+
+  
+  event.target.value.addEventListener("target", function(){
+
+  });
+
+  }
+
+
+
 
 search.addEventListener("click", function () {
   getSearchresults();
