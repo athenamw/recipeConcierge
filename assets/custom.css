@@ -4,19 +4,22 @@
 }
 
 .displayedContent {
-  background-image: url(./backgroundFood.png);
+  background-image: url(./bread.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 #ingredients {
   margin-top: 5%;
 }
 
-.button {
-  justify-content: center;
+.daily {
+  margin-left: 300px;
 }
-
 .image {
-  justify-content: center;
+  display: grid;
+  margin-left: 300px;
+}
+header {
+  text-shadow: 1px 2px 2px gray;
 }

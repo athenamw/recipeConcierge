@@ -17,7 +17,8 @@ function getRandomRecipe() {
     "is-2",
     "columns",
     "is-centered",
-    "m-4"
+    "m-4",
+    "has-text-black-bis"
   );
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
@@ -55,7 +56,7 @@ window.addEventListener("load", getRandomRecipe);
 // generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
-const generateMeal = function (input) {};
+// const generateMeal = function (input) {};
 
 var getSearchresults = function () {
   //will grab the input from the user for the search
