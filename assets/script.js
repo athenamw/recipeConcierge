@@ -78,18 +78,23 @@ var getSearchresults = function() {
   console.log(input);
 };
 
+//will display the data when the user clicks the submit button
 function displayData(data){
 console.log(data);
-let data_div = document.getElementById("data");
-let meals_div = document.createElement("div");
+let dataInfo = document.getElementById("data");
+let mealDiv = document.createElement("div");
+
+// append the name to a new div
+//need to add a class to each div
 for (let i = 0; i< data.meals.length; i++) {
-  let meal_div = document.createElement("div");
-  meal_div.innerHTML = data.meals[i].strMeal;
-  meals_div.append(meal_div);
+  let mealName = document.createElement("div");
   
+  mealName.innerHTML = data.meals[i].strMeal;
+  mealDiv.append(mealName);
 }
-console.log(meals_div);
-data_div.append(meals_div);
+
+console.log(mealDiv);
+dataInfo.append(mealDiv);
 }
 
 search.addEventListener("click", function (){
