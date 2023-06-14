@@ -9,7 +9,6 @@ var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
 var recipe;
 
-
 function getRandomRecipe() {
   // added this innerHTML because ingredients were not clearing on button clicks. Now refreshes to current recipe
   ingredients.innerHTML = `<h2>Ingredients</h2>`;
@@ -62,7 +61,6 @@ function getSearchresults() {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
 
-
   //localStorage.setItem("searchText",input);
   var mainSearchApi =
     "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
@@ -103,16 +101,16 @@ search.addEventListener("click", function () {
   getSearchresults();
 });
 var likeBtn = document.getElementById("like-button");
-likeBtn.addEventListener("click", function() {
-var recipeExists = false;
-var favorite = JSON.parse(localStorage.getItem("favorites"))||[];
-for (var i = 0; i < favorite.length; i++){
-  if (favorite[i].idMeal == recipe.idMeal){
-   recipeExists = true;  
+likeBtn.addEventListener("click", function () {
+  var recipeExists = false;
+  var favorite = JSON.parse(localStorage.getItem("favorites")) || [];
+  for (var i = 0; i < favorite.length; i++) {
+    if (favorite[i].idMeal == recipe.idMeal) {
+      recipeExists = true;
+    }
   }
-}
-if (recipeExists == false) {
-  favorite.push (recipe);
-}
-localStorage.setItem("favorites", JSON.stringify(favorite));  
-})
+  if (recipeExists == false) {
+    favorite.push(recipe);
+  }
+  localStorage.setItem("favorites", JSON.stringify(favorite));
+});

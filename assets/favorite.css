@@ -3,8 +3,11 @@
   font-family: "Playfair Display", serif;
 }
 
-.background {
+body {
   background-image: url(./bread.png);
-  background-repeat: no-repeat;
   background-size: cover;
+}
+
+.header {
+  margin-top: 12px;
 }
