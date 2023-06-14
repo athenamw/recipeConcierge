@@ -34,7 +34,7 @@ function getRandomRecipe() {
         for (let i = 1; i <= 20; i++) {
           var ingredientKey = "strIngredient" + i;
           var ingredientValue = recipe[ingredientKey];
-          console.log(ingredientValue);
+          //console.log(ingredientValue);
           var measureKey = "strMeasure" + i;
           var measureValue = recipe[measureKey];
           // displays the values under the photo
@@ -58,15 +58,14 @@ window.addEventListener("load", getRandomRecipe);
 // generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
-function getSearchresults() {
+
 function getSearchresults() {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
 
 
   //localStorage.setItem("searchText",input);
-  var mainSearchApi =
-    "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
+  var mainSearchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
   //calls the api
   fetch(mainSearchApi)
     .then(function (response) {
@@ -87,7 +86,6 @@ function getSearchresults() {
     });
   //console logs th user input
   console.log(input);
-}
 }
 
 //will display the title when the user clicks the submit button
