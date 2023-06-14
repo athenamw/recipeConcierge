@@ -105,7 +105,14 @@ search.addEventListener("click", function () {
 });
 var likeBtn = document.getElementById("like-button");
 likeBtn.addEventListener("click", function() {
-console.log(recipe);
-favorite.push(recipe);
+var recipeExists = false;
+for (var i = 0; i < favorite.length; i++){
+  if (favorite[i].idMeal == recipe.idMeal){
+   recipeExists = true;  
+  }
+}
+if (recipeExists == false) {
+  favorite.push (recipe);
+}
 localStorage.setItem("favorites", JSON.stringify(favorite));  
 })
