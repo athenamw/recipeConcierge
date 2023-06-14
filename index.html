@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"/>
     <link rel="stylesheet" href="./assets/custom.css" />
 
     <title>Recipe Concierge</title>
@@ -23,60 +24,57 @@
       <header class="header title is-1 columns is-centered">
         Recipe Concierge
       </header>
-      <section>
+      <section>qwaa
         <input type="text" id="searchText" />
-        <button id="searchBtn" class="button is-link is-light">Search</button>
+        <button id="searchBtn" class="button is-link is-warning is-hovered">
+          Search
+        </button>
       </section>
-
       <!-- Random Recipe -->
       <section class="container">
         <h2 class="title is-2 columns is-centered">Recipe of the day</h2>
         <!-- Random recipe button -->
-        <button id="daily" class="button is-link is-light m-4">
+        <button id="daily" class="button is-warning m-4">
           Click here to get a random recipe!
         </button>
-        <section class="card" data-meal-num="">
-          <h2 id="recipeName" class="title is-3 columns is-centered m-4 $card-header-background-color"></h2>
-          
-          <section>
-          <section class="card-image">
-            <a class="button is-link is-light m-4">Like</a>
-            
-           
-              <!-- <button class="button button-like">
-                <i class="fa fa-heart"></i>
-                <span>Like</span>
-              </button> -->
-            <!-- </figure> -->
-          </section>
-          <section id="randomRecipe" class="recipeCard">
-            <section class="media">
-              <section class="media-left">                
-                  <img id="image" class="image" alt="Meal Photograph" />                
-              </section>
-              <section
-                id="ingredients"
-                class="ingredientFont has-text-weight-bold has-text-black-bis is-size-5"
-              ></section>
-            </section>
+        <section class="card has-background-warning-dark" data-meal-num="">
+          <h2
+            id="recipeName"
+            class="title is-3 columns is-centered m-4 $card-header-background-color has-text-warning-light"
+          ></h2>
 
-            <section
-              id="instructions"
-              class="instructionsFont has-text-weight-bold is-size-5"
-            >
-              <h2
-                class="title is-3 columns is-centered mb-6 has-text-black-bis"
+          <section>
+            <section class="card-image">
+              <a  id="like-button" class="button is-light m-4">&#9825; Like</a>
+            </section>
+            <section id="randomRecipe" class="recipeCard">
+              <section class="media">
+                <section class="media-left">
+                  <img id="image" class="image" alt="Meal Photograph" />
+                </section>
+                <section
+                  id="ingredients"
+                  class="ingredientFont has-text-weight-bold has-text-warning-light is-size-5"
+                ></section>
+              </section>
+
+              <section
+                id="instructions"
+                class="instructionsFont has-text-weight-bold is-size-5 has-text-warning-light m-2"
               >
-                Instructions
-              </h2>
-              <p
-                id="instructionsText"
-                class="instructionsText has-text-black-bis is-size-5"
-              ></p>
+                <h2
+                  class="title is-3 columns is-centered mb-6 has-text-warning-light"
+                >
+                  Instructions
+                </h2>
+                <p
+                  id="instructionsText"
+                  class="instructionsText has-text-warning-light is-size-5"
+                ></p>
+              </section>
             </section>
           </section>
         </section>
-
       </section>
 
       <!-- <iframe
@@ -84,9 +82,7 @@
       height="315"
       src="https:\\www.youtube.com\embed\5ZYWVQ8imVA">
     </iframe>
-
     <div id="0"></div>
-
     </iframe> -->
 
       <!-- search information will be display in this div -->
