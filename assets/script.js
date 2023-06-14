@@ -8,7 +8,6 @@ var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
 var recipe;
-var favorite = JSON.parse(localStorage.getItem("favorites"))||[];
 
 
 function getRandomRecipe() {
@@ -106,6 +105,7 @@ search.addEventListener("click", function () {
 var likeBtn = document.getElementById("like-button");
 likeBtn.addEventListener("click", function() {
 var recipeExists = false;
+var favorite = JSON.parse(localStorage.getItem("favorites"))||[];
 for (var i = 0; i < favorite.length; i++){
   if (favorite[i].idMeal == recipe.idMeal){
    recipeExists = true;  
