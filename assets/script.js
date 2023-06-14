@@ -7,6 +7,7 @@ var recipeName = document.getElementById("recipeName");
 var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
+var likeBtn = document.getElementById("like-button");
 var recipe;
 
 function getRandomRecipe() {
@@ -96,6 +97,7 @@ function displayData(data) {
   console.log(meals_div);
   data_div.append(meals_div);
 }
+
 
 search.addEventListener("click", function () {
   getSearchresults();
