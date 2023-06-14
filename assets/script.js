@@ -7,6 +7,9 @@ var recipeName = document.getElementById("recipeName");
 var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
+var recipe;
+var favorite = JSON.parse(localStorage.getItem("favorites"))||[];
+
 
 function getRandomRecipe() {
   // added this innerHTML because ingredients were not clearing on button clicks. Now refreshes to current recipe
@@ -23,7 +26,7 @@ function getRandomRecipe() {
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        var recipe = data.meals[0];
+        recipe = data.meals[0];
         recipeName.textContent = recipe.strMeal;
         img.src = recipe.strMealThumb;
         var ingredientList = recipe.strMeasure;
@@ -59,6 +62,7 @@ dailyBtn.addEventListener("click", getRandomRecipe);
 function getSearchresults() {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
+
 
   //localStorage.setItem("searchText",input);
   var mainSearchApi =
@@ -99,3 +103,9 @@ function displayData(data) {
 search.addEventListener("click", function () {
   getSearchresults();
 });
+var likeBtn = document.getElementById("like-button");
+likeBtn.addEventListener("click", function() {
+console.log(recipe);
+favorite.push(recipe);
+localStorage.setItem("favorites", JSON.stringify(favorite));  
+})

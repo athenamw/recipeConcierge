@@ -15,3 +15,15 @@ document.querySelectorAll('.list li a').forEach(link => {
     window.location.href = '/recipe/' + recipeId;
   });
 });
+
+const heartButton = document.querySelector(".heart");
+
+heartButton.addEventListener("click", () => {
+  // Increment the counter variable.
+  let count = localStorage.getItem("count") || 0;
+  count++;
+  localStorage.setItem("count", count);
+
+  // Toggle the heart button's class to indicate that it has been clicked.
+  heartButton.classList.toggle("heart-clicked");
+});
