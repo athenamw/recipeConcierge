@@ -14,7 +14,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"/>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+    />
     <link rel="stylesheet" href="./assets/custom.css" />
 
     <title>Recipe Concierge</title>
@@ -24,17 +27,23 @@
       <header class="header title is-1 columns is-centered">
         Recipe Concierge
       </header>
-      <section>qwaa
+      <section>
         <input type="text" id="searchText" />
         <button id="searchBtn" class="button is-link is-warning is-hovered">
           Search
         </button>
+        <a
+          href="./favorite.html"
+          class="favLink is-pulled-right m-4 is-underlined is-size-3 has-text-black"
+        >
+          &#10084;&#65039;My Favorites</a
+        >
       </section>
       <!-- Random Recipe -->
       <section class="container">
         <h2 class="title is-2 columns is-centered">Recipe of the day</h2>
         <!-- Random recipe button -->
-        <button id="daily" class="button is-warning m-4">
+        <button id="daily" class="button is-warning m-4 is-pulled-center">
           Click here to get a random recipe!
         </button>
         <section class="card has-background-warning-dark" data-meal-num="">
@@ -45,7 +54,7 @@
 
           <section>
             <section class="card-image">
-              <a  id="like-button" class="button is-light m-4">&#9825; Like</a>
+              <a id="like-button" class="button is-light m-4">&#129293; Like</a>
             </section>
             <section id="randomRecipe" class="recipeCard">
               <section class="media">

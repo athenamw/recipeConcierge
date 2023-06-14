@@ -3,10 +3,8 @@
   font-family: "Playfair Display", serif;
 }
 
-.displayedContent {
+body {
   background-image: url(./bread.png);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 #ingredients {
