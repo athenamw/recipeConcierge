@@ -148,5 +148,5 @@ console.log(data.meals.length);
 search.addEventListener("click", function () {
   getSearchresults();
   displayRecipes(data);
-  dataInfo.innerHTML = "";
+  //dataInfo.innerHTML = "";
 });
