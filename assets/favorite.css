@@ -1,0 +1,10 @@
+* {
+  font-family: "Lobster", cursive;
+  font-family: "Playfair Display", serif;
+}
+
+.background {
+  background-image: url(./bread.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
