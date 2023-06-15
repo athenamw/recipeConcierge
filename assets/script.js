@@ -7,6 +7,7 @@ var recipeName = document.getElementById("recipeName");
 var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
+var randomContainer = document.getElementById("container");
 var recipe;
 
 
@@ -88,6 +89,12 @@ function getSearchresults() {
   console.log(input);
 }
 
+//will remove Recipe of the dat from the page not working yet
+function removeRecipeDay(){
+  randomContainer.innerHTML = ".removeRecipeDay {display: none; }";
+  document.head.appendChild(randomContainer);
+}
+
 //will display the title when the user clicks the submit button
 function displayRecipes(data){
 console.log(data);
@@ -149,6 +156,7 @@ console.log(data.meals.length);
 
 
 search.addEventListener("click", function () {
+  //removeRecipeDay();
   getSearchresults();
   displayRecipes(data);
   //dataInfo.innerHTML = "";
