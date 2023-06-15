@@ -8,6 +8,7 @@ var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
 var randomContainer = document.getElementById("container");
+var likeBtn = document.getElementById("like-button");
 var recipe;
 
 function getRandomRecipe() {
@@ -158,7 +159,21 @@ search.addEventListener("click", function () {
   getSearchresults();
   displayRecipes(data);
 });
-var likeBtn = document.getElementById("like-button");
+
+function changeLikeButtonIcon() {
+  const likeBtn = document.querySelector("#like-button");
+  const heartIcon = document.querySelector("#heartIcon");
+
+  if (likeBtn) {
+    likeBtn.addEventListener("click", function() {
+      if (heartIcon) {
+        this.style.backgroundImage = heartIcon.src;
+      }
+    });
+  }
+}
+
+window.addEventListener("load", changeLikeButtonIcon);
 likeBtn.addEventListener("click", function () {
   var recipeExists = false;
   var favorite = JSON.parse(localStorage.getItem("favorites")) || [];
