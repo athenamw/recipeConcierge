@@ -7,6 +7,7 @@ var recipeName = document.getElementById("recipeName");
 var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
+var randomContainer = document.getElementById("container");
 var recipe;
 
 function getRandomRecipe() {
@@ -33,7 +34,7 @@ function getRandomRecipe() {
         for (let i = 1; i <= 20; i++) {
           var ingredientKey = "strIngredient" + i;
           var ingredientValue = recipe[ingredientKey];
-          console.log(ingredientValue);
+          //console.log(ingredientValue);
           var measureKey = "strMeasure" + i;
           var measureValue = recipe[measureKey];
           // displays the values under the photo
@@ -57,19 +58,21 @@ window.addEventListener("load", getRandomRecipe);
 // generates random recipe on button click
 dailyBtn.addEventListener("click", getRandomRecipe);
 
+
 function getSearchresults() {
   //will grab the input from the user for the search
   var input = document.getElementById("searchText").value;
 
   //localStorage.setItem("searchText",input);
-  var mainSearchApi =
-    "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
+  var mainSearchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + input;
   //calls the api
   fetch(mainSearchApi)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayData(data);
+          displayRecipes(data);
+          console.log(data);
+    
         });
         //will run if it cant call the api
       } else {
@@ -84,21 +87,78 @@ function getSearchresults() {
   console.log(input);
 }
 
-function displayData(data) {
-  console.log(data);
-  let data_div = document.getElementById("data");
-  let meals_div = document.createElement("div");
-  for (let i = 0; i < data.meals.length; i++) {
-    let meal_div = document.createElement("div");
-    meal_div.innerHTML = data.meals[i].strMeal;
-    meals_div.append(meal_div);
-  }
-  console.log(meals_div);
-  data_div.append(meals_div);
+//will remove Recipe of the dat from the page not working yet
+function removeRecipeDay(){
+  randomContainer.innerHTML = ".removeRecipeDay {display: none; }";
+  document.head.appendChild(randomContainer);
 }
+
+//will display the title when the user clicks the submit button
+function displayRecipes(data){
+console.log(data);
+
+let dataInfo = document.getElementById("data");
+let mealDiv = document.createElement("section");
+mealDiv.id = "search-results";
+
+// append the name to a new div
+//need to add a class to each div
+for (let i = 0; i< data.meals.length; i++) {
+console.log(data.meals.length);
+
+  let mealContainer = document.createElement("section");
+  mealContainer.id = "recipe " + i;
+  let mealName = document.createElement("h2");
+  mealName.id = "recipe-name " + i;
+
+  // create the p element for the recipe
+  let measurements = document.createElement("p");
+  measurements.id = "ingredients";
+  
+  //displays the image
+  let image = document.createElement("img");
+  image.id = "recipe";
+  image.src = data.meals[i].strMealThumb;
+  image.alt = "Meal Photograph";
+
+  let instructions = document.createElement("p");
+  instructions.id = "instructions";
+
+  mealName.textContent = data.meals[i].strMeal;
+  mealContainer.appendChild(mealName);
+
+  image.textContent = data.meals[i].strMealThumb;
+  // appends the image to container
+  mealContainer.appendChild(image);
+
+
+  //will add the ingredients into the container
+  for (var j = 1; j <= 20; j++) {  
+    var ingredientKey = "strIngredient" + j;
+    var ingredientValue = data.meals[i][ingredientKey];
+    var measureKey = "strMeasure" + j;
+    var measureValue = data.meals[i][measureKey];
+// displays the values under the photo
+    if (ingredientValue && measureValue) {
+     measurements.innerHTML += `${measureValue} of ${ingredientValue}<br>`;
+     mealContainer.appendChild(measurements)
+    }
+  }
+  instructions.innerHTML = "Instructions<br>" + data.meals[i].strInstructions.replaceAll("\r\n","<br>");
+  mealContainer.appendChild(instructions);
+
+  //added div to the container
+  mealDiv.append(mealContainer);
+  dataInfo.append(mealDiv);
+}}
+
+
 // this is event listener for like button on the random recipe section
 search.addEventListener("click", function () {
+  //removeRecipeDay();
   getSearchresults();
+  displayRecipes(data);
+  //dataInfo.innerHTML = "";
 });
 var likeBtn = document.getElementById("like-button");
 likeBtn.addEventListener("click", function () {
