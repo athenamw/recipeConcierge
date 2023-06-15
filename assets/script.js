@@ -96,7 +96,7 @@ function displayData(data) {
   console.log(meals_div);
   data_div.append(meals_div);
 }
-
+// this is event listener for like button on the random recipe section
 search.addEventListener("click", function () {
   getSearchresults();
 });
