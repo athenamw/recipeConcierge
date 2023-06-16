@@ -8,9 +8,11 @@ var img = document.getElementById("image");
 var ingredients = document.getElementById("ingredients");
 var instructions = document.getElementById("instructionsText");
 var randomContainer = document.getElementById("container");
+var likeBtn = document.getElementById("like-button");
 var recipe;
 
 function getRandomRecipe() {
+  changeLikeButtonIcon("unlike")
   // added this innerHTML because ingredients were not clearing on button clicks. Now refreshes to current recipe
   ingredients.innerHTML = `<h2>Ingredients</h2>`;
   // only applies to h2 which is the first child
@@ -158,17 +160,51 @@ search.addEventListener("click", function () {
   getSearchresults();
   displayRecipes(data);
 });
-var likeBtn = document.getElementById("like-button");
-likeBtn.addEventListener("click", function () {
+
+function checkRecipeExisting (array) {
+  var recipeExists = false;
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].idMeal == recipe.idMeal) {
+      recipeExists = true;
+    }
+  }
+return recipeExists
+}
+
+function changeLikeButtonIcon(condition) {
+  if (condition === "unlike") {
+
+    likeBtn.textContent = "😶 Like"
+  } else {
+
+    likeBtn.textContent = "😋 Liked"
+  }
+}
+
+function handleLikeButtonClick() {
+  var favorite = JSON.parse(localStorage.getItem("favorites")) || [];
+  if (checkRecipeExisting (favorite)) {
+console.log ("recipe should be deleted")
+  } else {
+    saveRecipe()
+    changeLikeButtonIcon()
+   }
+}
+function saveRecipe() {
   var recipeExists = false;
   var favorite = JSON.parse(localStorage.getItem("favorites")) || [];
   for (var i = 0; i < favorite.length; i++) {
-    if (favorite[i].idMeal == recipe.idMeal) {
-      recipeExists = true;
+   if (favorite[i].idMeal == recipe.idMeal) {
+     recipeExists = true;
     }
   }
   if (recipeExists == false) {
     favorite.push(recipe);
   }
+
   localStorage.setItem("favorites", JSON.stringify(favorite));
-});
+
+}
+
+//window.addEventListener("load", changeLikeButtonIcon);
+likeBtn.addEventListener("click", handleLikeButtonClick);
