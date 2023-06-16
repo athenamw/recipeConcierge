@@ -6,90 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" />
+    <script src="https://kit.fontawesome.com/76db2e0c5a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/custom.css" />
 
     <title>Recipe Concierge</title>
   </head>
   <body>
     <section id="displayedContent" class="displayedContent">
+      <header class="header title is-1 columns is-centered">Recipe Concierge</header>
+      <section>
       <header class="header title is-1 columns is-centered">
         Recipe Concierge
       </header>
       <section id="topBar">
         <input type="text" id="searchText" />
-        <button id="searchBtn" class="button is-link is-warning is-hovered">
-          Search
-        </button>
-        <a
-          href="./favorite.html"
-          class="favLink is-pulled-right m-4 is-underlined is-size-3 has-text-black"
-        >
-          &#10084;&#65039;My Favorites</a
-        >
+        <button id="searchBtn" class="button is-link is-warning is-hovered">Search</button>
+        <a href="./favorite.html" class="favLink is-pulled-right m-4 is-underlined is-size-3 has-text-black"> &#10084;&#65039;My Favorites</a>
       </section>
       <!-- Random Recipe -->
       <section class="container">
         <h2 class="title is-2 columns is-centered">Recipe of the day</h2>
         <!-- Random recipe button -->
-        <button id="daily" class="button is-warning m-4 is-pulled-center">
-          Click here to get a random recipe!
-        </button>
+        <button id="daily" class="button is-warning m-4 is-pulled-center">Click here to get a random recipe!</button>
         <section class="card has-background-warning-dark" data-meal-num="">
-          <h2
-            id="recipeName"
-            class="title is-3 columns is-centered m-4 $card-header-background-color has-text-warning-light"
-          ></h2>
+          <h2 id="recipeName" class="title is-3 columns is-centered m-4 $card-header-background-color has-text-warning-light"></h2>
 
-          <section>
-            <section class="card-image">
-              <a id="like-button" class="button is-light m-4">&#129293; Like</a>
+          <a id="like-button" class="button is-light m-4">😶 Like</a>
+
+          <section id="randomRecipe" class="recipeCard">
+            <section class="media">
+              <section class="media-left">
+                <img id="image" class="image" alt="Meal Photograph" />
+              </section>
+              <section id="ingredients" class="ingredientFont has-text-weight-bold has-text-warning-light is-size-5"></section>
             </section>
-            <section id="randomRecipe" class="recipeCard">
-              <section class="media">
-                <section class="media-left">
-                  <img id="image" class="image" alt="Meal Photograph" />
-                </section>
-                <section
-                  id="ingredients"
-                  class="ingredientFont has-text-weight-bold has-text-warning-light is-size-5"
-                ></section>
-              </section>
 
-              <section
-                id="instructions"
-                class="instructionsFont has-text-weight-bold is-size-5 has-text-warning-light m-2"
-              >
-                <h2
-                  class="title is-3 columns is-centered mb-6 has-text-warning-light"
-                >
-                  Instructions
-                </h2>
-                <p
-                  id="instructionsText"
-                  class="instructionsText has-text-warning-light is-size-5"
-                ></p>
-              </section>
+            <section id="instructions" class="instructionsFont has-text-weight-bold is-size-5 has-text-warning-light m-2">
+              <h2 class="title is-3 columns is-centered mb-6 has-text-warning-light">Instructions</h2>
+              <p id="instructionsText" class="instructionsText has-text-warning-light is-size-5"></p>
             </section>
           </section>
         </section>
       </section>
-
-      <!-- search information will be display in this div -->
-      <div id="data" class="data"></div>
-      <script src="./assets/script.js" async></script>
     </section>
+
+    <!-- search information will be display in this div -->
+    <div id="data" class="data"></div>
+    <script src="./assets/script.js" async></script>
 
     <!-- This section below will be deleted later -->
     <!-- <section id="recipe 1">
