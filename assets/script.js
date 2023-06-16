@@ -96,14 +96,14 @@ function removeRecipeDay() {
 
 //will display the title when the user clicks the submit button
 function displayRecipes(data) {
-  console.log(data);
 
   let dataInfo = document.getElementById("data");
   let mealDiv = document.createElement("section");
   mealDiv.id = "search-results";
-
+  dataInfo.innerHTML = "";
   // append the name to a new div
   //need to add a class to each div
+  console.log("before the for loop", data.meals.length);
   for (let i = 0; i < data.meals.length; i++) {
     console.log(data.meals.length);
 
@@ -115,7 +115,7 @@ function displayRecipes(data) {
     mealName.classList.add("title", "columns", "is-centered");
 
     // create the p element for the recipe
-    let measurements = document.createElement("p");
+    let measurements = document.createElement("div");
     measurements.id = "ingredients"; 
     //measurements.classList.add("ingredients");makes the font to big
     measurements.innerHTML = "Ingredients:";
@@ -128,7 +128,7 @@ function displayRecipes(data) {
     image.alt = "Meal Photograph";
     image.classList.add("image");
 
-    let instructions = document.createElement("p");
+    let instructions = document.createElement("div");
     instructions.id = "instructions";
     instructions.classList.add("instructions", "has-text-white");
 
