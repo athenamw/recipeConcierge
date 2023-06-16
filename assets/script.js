@@ -182,13 +182,13 @@ function changeLikeButtonIcon(condition) {
 }
 
 function handleLikeButtonClick() {
-//   var favorite = JSON.parse(localStorage.getItem("favorites")) || [];
-//   if (checkRecipeExisting (favorite)) {
-// console.log ("recipe should be deleted")
-//   } else {
+  var favorite = JSON.parse(localStorage.getItem("favorites")) || [];
+  if (checkRecipeExisting (favorite)) {
+console.log ("recipe should be deleted")
+  } else {
     saveRecipe()
     changeLikeButtonIcon()
-  // }
+   }
 }
 function saveRecipe() {
   var recipeExists = false;
@@ -197,11 +197,13 @@ function saveRecipe() {
    if (favorite[i].idMeal == recipe.idMeal) {
      recipeExists = true;
     }
+  }
   if (recipeExists == false) {
     favorite.push(recipe);
   }
+
   localStorage.setItem("favorites", JSON.stringify(favorite));
-}
+
 }
 
 //window.addEventListener("load", changeLikeButtonIcon);
