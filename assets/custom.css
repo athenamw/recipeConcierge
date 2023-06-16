@@ -5,6 +5,7 @@
 
 body {
   background-image: url(./bread.png);
+  background-size: 100% vh;
 }
 
 #ingredients {
@@ -20,4 +21,9 @@ body {
 }
 header {
   text-shadow: 1px 2px 2px gray;
+}
+
+#topBar {
+  z-index: 1;
+  position: relative;
 }
