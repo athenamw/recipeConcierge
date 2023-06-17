@@ -35,6 +35,17 @@ function handleLikeButtonClick(meal) {
   changeLikeButtonIcon(this.event.target);
 }
 
+function getLikeButtonTextContent(meal) {
+  var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
+  let recipeInfo = checkRecipeExisting(favorite, meal);
+  var recipeExists = recipeInfo[0];
+  if (recipeExists) {
+    return '😋 Liked';
+  } else {
+    return '😶 Like';
+  }
+}
+
 window.addEventListener('load', function () {
   var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   var favoritesSection = document.getElementById('favMini');
@@ -49,11 +60,8 @@ window.addEventListener('load', function () {
     let mealName = document.createElement('h2');
     mealName.id = 'recName ' + i;
     let resultsLikeBtn = document.createElement('a');
-    resultsLikeBtn.id = 'resultsLikeBtn' + i;
-    resultsLikeBtn.textContent = '😶 Like';
-    resultsLikeBtn.classList.add('like-button', 'button', 'is-light', 'm-4');
-
-    resultsLikeBtn.setAttribute('data-mealId', favorites[i].idMeal);
+    resultsLikeBtn.textContent = getLikeButtonTextContent(favorites[i]);
+    resultsLikeBtn.classList.add('button', 'is-light', 'm-4');
     resultsLikeBtn.addEventListener('click', function () {
       handleLikeButtonClick(favorites[i]);
     });
