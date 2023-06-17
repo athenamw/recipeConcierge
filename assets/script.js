@@ -110,6 +110,7 @@ function displayRecipes(data) {
     let mealContainer = document.createElement("section");
     mealContainer.id = "recipe " + i;
     mealContainer.classList.add("class=container", "section", "box", "has-text-white");
+    
     let mealName = document.createElement("h2");
     mealName.id = "recipe-name " + i;
     mealName.classList.add("title", "columns", "is-centered");
@@ -135,6 +136,9 @@ function displayRecipes(data) {
 
     mealName.textContent = data.meals[i].strMeal;
     mealContainer.appendChild(mealName);
+    //add like button
+    //mealContainer.appendChild(likeBtn);
+
 
     image.textContent = data.meals[i].strMealThumb;
     // appends the image to container
