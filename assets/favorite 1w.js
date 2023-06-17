@@ -212,16 +212,15 @@ function initMap(selectedIngredients) {
           }
 
           locationsContainer.innerHTML = ""; // Clear previous results
-          const flattenResultsArray = resultsArray.flat();
-          // resultsArray.forEach((results) => {
-            // for (let i = 0; i < results.length; i++) {
-              displaySearchResults(flattenResultsArray);
-              // createMarker(results[i], map);
-              // const locationItem = document.createElement("div");
-              // locationItem.textContent = results[i].name;
-              // locationsContainer.appendChild(locationItem);
-            // }
-          // });
+
+          resultsArray.forEach((results) => {
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i], map);
+              const locationItem = document.createElement("div");
+              locationItem.textContent = results[i].name;
+              locationsContainer.appendChild(locationItem);
+            }
+          });
         })
         .catch((error) => {
           console.log("Error:", error);
@@ -250,95 +249,30 @@ function createMarker(place, map) {
 
 
 
-// Find the location input element
-var locationInput = document.getElementById("location-input");
+function displaySearchResults(resultsArray, container) {
+  container.innerHTML = ""; // Clear previous results
 
-// Check if the element exists before accessing its value
-if (locationInput) {
-  var location = locationInput.value;
-  console.log(location);
-  // Rest of your code that relies on the location value
-} else {
-  console.error("Element with ID 'location-input' not found.");
-}
+  // Iterate over each set of results
+  resultsArray.forEach((results, index) => {
+    // Create a container for each set of results
+    const resultContainer = document.createElement("div");
+    resultContainer.classList.add("result-set");
 
-var currentPage=0;
-function dispalyNextPage(){
-  var pageItems = document.querySelectorAll(".location-item");
-  pageItems.forEach(function (pageItem) {
-    pageItem.style.display = "none";
-  });
-  pageItems = document.querySelectorAll(".location-item[data-page='" + currentPage + "']");
-  console.log(pageItems, currentPage);
-  pageItems.forEach(function (pageItem) {
-  pageItem.style.display = "block";
-  });
-};
+    // Add a heading for the set of results
+    const heading = document.createElement("h3");
+    heading.textContent = "Results Set " + (index + 1);
+    resultContainer.appendChild(heading);
 
-function displaySearchResults(results, pagination) {
-  var locationsContainer = document.getElementById("locations-container");
-  locationsContainer.innerHTML = ""; // Clear the container before adding new results
-
-  results.forEach(function (place, index) {
-
-    var locationItem = document.createElement("div");
-    locationItem.classList.add("location-item");
-    locationItem.dataset.page= Math.floor(index / 5);
-    locationItem.style.display = "none";
-    // Create an image container
-    var imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
-
-    // Create an image element
-    var image = document.createElement("img");
-    image.src = place.photos?.[0]?.getUrl();
-    image.alt = "Location Photo";
-    imageContainer.appendChild(image);
-
-    // Create a details container
-    var detailsContainer = document.createElement("div");
-    detailsContainer.classList.add("details-container");
-
-    // Create a title element
-    var title = document.createElement("h3");
-    title.textContent = place.name;
-
-    // Create an address element
-    var address = document.createElement("p");
-    address.textContent = place.formatted_address;
-
-    detailsContainer.appendChild(title);
-    detailsContainer.appendChild(address);
-
-    locationItem.appendChild(imageContainer);
-    locationItem.appendChild(detailsContainer);
-
-    locationsContainer.appendChild(locationItem);
-
-    console.log(place);
-  });
-
-  currentPage=0;
-  dispalyNextPage();
-
-  // Display pagination
-  var paginationContainer = document.getElementById("pagination-container");
-  paginationContainer.innerHTML = "";
-
-  // pagination.forEach(function (page) {
-    for (let i = 0; i <= Math.floor(results.length / 5); i++) {
-    var pageLink = document.createElement("a");
-    pageLink.href = "#";
-    pageLink.textContent = i+1;
-    pageLink.dataset.page = i;
-    pageLink.addEventListener("click", function () {
-      event.preventDefault();
-      currentPage = parseInt(this.dataset.page);
-      dispalyNextPage();
+    // Iterate over each result in the set
+    results.forEach((result) => {
+      // Create an element for each result and add it to the container
+      const resultElement = document.createElement("div");
+      resultElement.classList.add("location");
+      resultElement.textContent = result.name;
+      resultContainer.appendChild(resultElement);
     });
 
-    paginationContainer.appendChild(pageLink);
-  };
+    // Append the result container to the main container
+    container.appendChild(resultContainer);
+  });
 }
-
-

@@ -316,6 +316,8 @@ function displaySearchResults(results, pagination) {
     locationsContainer.appendChild(locationItem);
 
     console.log(place);
+
+
   });
 
   currentPage=0;
@@ -332,7 +334,6 @@ function displaySearchResults(results, pagination) {
     pageLink.textContent = i+1;
     pageLink.dataset.page = i;
     pageLink.addEventListener("click", function () {
-      event.preventDefault();
       currentPage = parseInt(this.dataset.page);
       dispalyNextPage();
     });
@@ -342,3 +343,19 @@ function displaySearchResults(results, pagination) {
 }
 
 
+
+
+// // Create the locations container
+// const locationsContainer = document.createElement("div");
+// locationsContainer.id = "locations-container";
+
+// // Create the pagination container
+// const paginationContainer = document.createElement("div");
+// paginationContainer.id = "pagination-container";
+
+// // Get a reference to the body element
+// const body = document.querySelector("body");
+
+// // // Append the containers to the body
+// body.appendChild(paginationContainer);
+// body.appendChild(locationsContainer);
