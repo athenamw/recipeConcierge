@@ -96,34 +96,42 @@ function removeRecipeDay() {
 
 //will display the title when the user clicks the submit button
 function displayRecipes(data) {
-  console.log(data);
 
   let dataInfo = document.getElementById("data");
   let mealDiv = document.createElement("section");
   mealDiv.id = "search-results";
-
+  dataInfo.innerHTML = "";
   // append the name to a new div
   //need to add a class to each div
+  console.log("before the for loop", data.meals.length);
   for (let i = 0; i < data.meals.length; i++) {
     console.log(data.meals.length);
 
     let mealContainer = document.createElement("section");
     mealContainer.id = "recipe " + i;
+    mealContainer.classList.add("class=container", "section", "box", "has-text-white");
     let mealName = document.createElement("h2");
     mealName.id = "recipe-name " + i;
+    mealName.classList.add("title", "columns", "is-centered");
 
     // create the p element for the recipe
-    let measurements = document.createElement("p");
-    measurements.id = "ingredients";
+    let measurements = document.createElement("div");
+    measurements.id = "ingredients"; 
+    //measurements.classList.add("ingredients");makes the font to big
+    measurements.innerHTML = "Ingredients:";
+
 
     //displays the image
     let image = document.createElement("img");
     image.id = "recipe";
     image.src = data.meals[i].strMealThumb;
     image.alt = "Meal Photograph";
+    image.classList.add("image");
 
-    let instructions = document.createElement("p");
+    let instructions = document.createElement("div");
     instructions.id = "instructions";
+    instructions.classList.add("instructions", "has-text-white");
+
 
     mealName.textContent = data.meals[i].strMeal;
     mealContainer.appendChild(mealName);
@@ -140,13 +148,19 @@ function displayRecipes(data) {
       var measureValue = data.meals[i][measureKey];
       // displays the values under the photo
       if (ingredientValue && measureValue) {
-        measurements.innerHTML += `${measureValue} of ${ingredientValue}<br>`;
+        measurements.innerHTML += `<p>${measureValue} of ${ingredientValue}</p>`;
         mealContainer.appendChild(measurements);
       }
     }
-    instructions.innerHTML =
-      "Instructions<br>" +
-      data.meals[i].strInstructions.replaceAll("\r\n", "<br>");
+
+    instructions.innerHTML = "<ul>Instructions:<br>" +
+  data.meals[i].strInstructions
+    .replaceAll("\r\n", "<br>")
+    .split(". ")
+    .map(sentence => `<li>${sentence}</li>`)
+    .join("</li>") +
+    "</li></ul>";
+mealContainer.appendChild(instructions);
     mealContainer.appendChild(instructions);
 
     //added div to the container
@@ -157,6 +171,7 @@ function displayRecipes(data) {
 
 // this is event listener for like button on the random recipe section
 search.addEventListener("click", function () {
+  removeRecipeDay()
   getSearchresults();
   displayRecipes(data);
 });

@@ -27,3 +27,55 @@ header {
   z-index: 1;
   position: relative;
 }
+.container{
+  margin-top: 100px;
+}
+
+#ingredients{
+  margin: 0 auto 0 auto;
+  text-align: center;
+  font-size: 80%;
+  font-size: "Playfair Display", serif;
+  display: inline;
+}
+
+.section {
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  color: hsl(206, 17%, 28%);
+  margin: 0 auto;
+  max-width: 80%;
+  background-color: hsla(8, 89%, 21%, 0.702);
+  margin-bottom: 1rem;
+  text-align: center
+}
+
+.title {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.image {
+  float: left;
+  width: 70%;
+  height: auto;
+  display: inline; 
+  margin: 0 auto;
+}
+.ingredients{
+  color: white;
+  margin-top: 0;
+  font-size: 2rem;
+}
+#instructions{
+  display: block;
+  text-size-adjust: 80%;
+  text-align: center;
+
+}
+
+.tags {
+  margin-top: 1rem;
+}
