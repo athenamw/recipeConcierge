@@ -1,5 +1,5 @@
 * {
-  font-family: "Lobster", cursive;
+  font-family: "Lobster", "cursive";
   font-family: "Playfair Display", serif;
 }
 
@@ -7,9 +7,13 @@ body {
   background-image: url(./bread.png);
   background-size: 100% vh;
 }
+#searchText{
+  width: 50%;
+  font-size: 20px;
+}
 
 #ingredients {
-  margin-top: 5%;
+  margin-top:0;
 }
 
 .daily {
@@ -19,16 +23,21 @@ body {
   display: grid;
   margin-left: 300px;
 }
-header {
+.header {
+  margin-top: .01px;
   text-shadow: 1px 2px 2px gray;
 }
 
 #topBar {
   z-index: 1;
   position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .container{
-  margin-top: 100px;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-top: 50px;
 }
 
 #ingredients{
@@ -59,8 +68,8 @@ header {
 
 .image {
   float: left;
-  width: 70%;
-  height: auto;
+  max-width: 70%;
+  max-height: 50%;
   display: inline; 
   margin: 0 auto;
 }
@@ -75,7 +84,6 @@ header {
   text-align: center;
 
 }
-
 .tags {
   margin-top: 1rem;
 }
