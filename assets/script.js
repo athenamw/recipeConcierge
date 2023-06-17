@@ -9,7 +9,6 @@ var ingredients = document.getElementById('ingredients');
 var instructions = document.getElementById('instructionsText');
 var randomContainer = document.getElementById('container');
 var likeBtn = document.getElementById('like-button');
-var recipe;
 
 function getRandomRecipe() {
   changeLikeButtonIcon('unlike');
@@ -20,11 +19,16 @@ function getRandomRecipe() {
   fetch(randomRecipeApi).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        recipe = data.meals[0];
+        var recipe = data.meals[0];
         recipeName.textContent = recipe.strMeal;
         img.src = recipe.strMealThumb;
         var ingredientList = recipe.strMeasure;
         var measure = recipe.strIngredient;
+        var likeButton = document.getElementById('like-button');
+        likeButton.setAttribute('data-mealId', recipe.idMeal);
+        likeButton.addEventListener('click', function () {
+          handleLikeButtonClick(recipe);
+        });
         // loop for getting the measurement and the ingredients paired up
         for (let i = 1; i <= 20; i++) {
           var ingredientKey = 'strIngredient' + i;
@@ -42,6 +46,7 @@ function getRandomRecipe() {
         // displays the instructions under the ingredients
         instructions.innerHTML = recipeInstructions;
       });
+      //addEventListenerToLikeBtns();
     }
   });
 }
@@ -85,42 +90,49 @@ function removeRecipeDay() {
 
 //will display the title when the user clicks the submit button
 function displayRecipes(data) {
-
-  let dataInfo = document.getElementById("data");
-  let mealDiv = document.createElement("section");
-  mealDiv.id = "search-results";
-  dataInfo.innerHTML = "";
+  let dataInfo = document.getElementById('data');
+  let mealDiv = document.createElement('section');
+  mealDiv.id = 'search-results';
+  dataInfo.innerHTML = '';
   // append the name to a new div
   //need to add a class to each div
-  console.log("before the for loop", data.meals.length);
+  console.log('before the for loop', data.meals.length);
   for (let i = 0; i < data.meals.length; i++) {
-    console.log(data.meals.length);
+    console.log(data);
 
-    let mealContainer = document.createElement("section");
-    mealContainer.id = "recipe " + i;
-    mealContainer.classList.add("class=container", "section", "box", "has-text-white");
-    let mealName = document.createElement("h2");
-    mealName.id = "recipe-name " + i;
-    mealName.classList.add("title", "columns", "is-centered");
+    let mealContainer = document.createElement('section');
+    mealContainer.id = 'recipe ' + i;
+    let mealName = document.createElement('h2');
+    mealName.id = 'recipe-name ' + i;
+    let resultsLikeBtn = document.createElement('a');
+    resultsLikeBtn.id = 'resultsLikeBtn' + i;
+    resultsLikeBtn.textContent = '😶 Like';
+    resultsLikeBtn.classList.add('like-button', 'button', 'is-light', 'm-4');
 
+    resultsLikeBtn.setAttribute('data-mealId', data.meals[i].idMeal);
+    resultsLikeBtn.addEventListener('click', function () {
+      handleLikeButtonClick(data.meals[i]);
+    });
+
+    mealContainer.appendChild(resultsLikeBtn);
+    mealContainer.classList.add('class=container', 'section', 'box', 'has-text-white');
+    mealName.classList.add('title', 'columns', 'is-centered');
     // create the p element for the recipe
-    let measurements = document.createElement("div");
-    measurements.id = "ingredients"; 
+    let measurements = document.createElement('div');
+    measurements.id = 'ingredients';
     //measurements.classList.add("ingredients");makes the font to big
-    measurements.innerHTML = "Ingredients:";
-
+    measurements.innerHTML = 'Ingredients:';
 
     //displays the image
     let image = document.createElement('img');
     image.id = 'recipe';
     image.src = data.meals[i].strMealThumb;
-    image.alt = "Meal Photograph";
-    image.classList.add("image");
+    image.alt = 'Meal Photograph';
+    image.classList.add('image');
 
-    let instructions = document.createElement("div");
-    instructions.id = "instructions";
-    instructions.classList.add("instructions", "has-text-white");
-
+    let instructions = document.createElement('div');
+    instructions.id = 'instructions';
+    instructions.classList.add('instructions', 'has-text-white');
 
     mealName.textContent = data.meals[i].strMeal;
     mealContainer.appendChild(mealName);
@@ -142,14 +154,15 @@ function displayRecipes(data) {
       }
     }
 
-    instructions.innerHTML = "<ul>Instructions:<br>" +
-  data.meals[i].strInstructions
-    .replaceAll("\r\n", "<br>")
-    .split(". ")
-    .map(sentence => `<li>${sentence}</li>`)
-    .join("</li>") +
-    "</li></ul>";
-mealContainer.appendChild(instructions);
+    instructions.innerHTML =
+      '<ul>Instructions:<br>' +
+      data.meals[i].strInstructions
+        .replaceAll('\r\n', '<br>')
+        .split('. ')
+        .map((sentence) => `<li>${sentence}</li>`)
+        .join('</li>') +
+      '</li></ul>';
+    mealContainer.appendChild(instructions);
     mealContainer.appendChild(instructions);
 
     //added div to the container
@@ -159,59 +172,53 @@ mealContainer.appendChild(instructions);
 }
 
 // this is event listener for like button on the random recipe section
-search.addEventListener("click", function () {
-  removeRecipeDay()
+search.addEventListener('click', function () {
+  removeRecipeDay();
   getSearchresults();
-  displayRecipes(data);
 });
 
-function checkRecipeExisting(array) {
+function checkRecipeExisting(array, meal) {
   var recipeExists = false;
   for (var i = 0; i < array.length; i++) {
-    if (array[i].idMeal == recipe.idMeal) {
+    if (array[i].idMeal == meal.idMeal) {
       recipeExists = true;
     }
   }
   return recipeExists;
 }
 
-function changeLikeButtonIcon(condition) {
-  if (condition === 'unlike') {
-    likeBtn.textContent = '😶 Like';
+function changeLikeButtonIcon() {
+  if (this.textContent == '😶 Like') {
+    this.textContent = '😋 Liked';
   } else {
-    likeBtn.textContent = '😋 Liked';
+    this.textContent = '😶 Like';
   }
 }
 
-function handleLikeButtonClick() {
+function handleLikeButtonClick(meal) {
   var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
-  if (checkRecipeExisting(favorite)) {
+  if (checkRecipeExisting(favorite, meal)) {
     console.log('recipe should be deleted');
   } else {
-    saveRecipe();
+    saveRecipe(meal);
     changeLikeButtonIcon();
   }
 }
-function saveRecipe() {
-  var recipeExists = false;
-  var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
-  for (var i = 0; i < favorite.length; i++) {
-    if (favorite[i].idMeal == recipe.idMeal) {
-      recipeExists = true;
-    }
-  }
-  if (recipeExists == false) {
-    favorite.push(recipe);
-  }
 
+function saveRecipe(meal) {
+  var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
+  favorite.push(meal);
   localStorage.setItem('favorites', JSON.stringify(favorite));
 }
 
 //window.addEventListener("load", changeLikeButtonIcon);
 //likeBtn.addEventListener('click', handleLikeButtonClick);
-
-const likeBtns = document.querySelectorAll('.like-buttons');
-
-for (var i = 0; i < likeBtns.length; i++) {
-  likeBtns[i].addEventListener('click', handleLikeButtonClick);
-}
+// function addEventListenerToLikeBtns() {
+//   const likeBtns = document.querySelectorAll('.like-button');
+//   for (var i = 0; i < likeBtns.length; i++) {
+//     likeBtns[i].addEventListener('click', () => {
+//       handleLikeButtonClick(likeBtns[i].getAttribute('data-mealId'));
+//     });
+//   }
+// }
+// document.querySelector('#carl').getAttribute('data-cowabunga');
