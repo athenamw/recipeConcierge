@@ -187,11 +187,12 @@ function checkRecipeExisting(array, meal) {
   return recipeExists;
 }
 
-function changeLikeButtonIcon() {
-  if (this.textContent == '😶 Like') {
-    this.textContent = '😋 Liked';
+function changeLikeButtonIcon(likeButton) {
+  console.log(likeButton);
+  if (likeButton.textContent == '😶 Like') {
+    likeButton.textContent = '😋 Liked';
   } else {
-    this.textContent = '😶 Like';
+    likeButton.textContent = '😶 Like';
   }
 }
 
@@ -201,8 +202,8 @@ function handleLikeButtonClick(meal) {
     console.log('recipe should be deleted');
   } else {
     saveRecipe(meal);
-    changeLikeButtonIcon();
   }
+  changeLikeButtonIcon(this.event.target);
 }
 
 function saveRecipe(meal) {
