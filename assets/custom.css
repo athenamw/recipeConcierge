@@ -19,6 +19,10 @@ body {
 .daily {
   margin-left: 300px;
 }
+.random-image{
+  max-width: 80%;
+
+}
 .image {
   display: grid;
   margin-left: 300px;
@@ -30,12 +34,20 @@ body {
 
 #topBar {
   z-index: 1;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: auto; 
   margin-right: auto;
   width: 90%;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+#searchText,
+#searchBtn,
+#daily,
+.favLink {
+  margin: 2px;
 }
 .container{
   border-radius: 5px;
@@ -46,7 +58,7 @@ body {
 #ingredients{
   margin: 0 auto 0 auto;
   text-align: center;
-  font-size: 80%;
+  font-size: 100%;
   font-size: "Playfair Display", serif;
   display: inline;
 }
@@ -82,17 +94,20 @@ body {
 }
 .ingredients{
   flex-basis: 50%;
-  color: white;
   margin-top: 0;
-  font-size: 2rem;
+  font-size: 20px;
 }
 #instructions{
   flex-basis: 100%;
   display: block;
   text-size-adjust: 80%;
   text-align: center;
+  font-size: 100%;
 
 }
 .tags {
   margin-top: 1rem;
+}
+.removeRandomRecipeBtm{
+  display: none;
 }
