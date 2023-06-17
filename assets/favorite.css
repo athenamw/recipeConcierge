@@ -1,6 +1,6 @@
 * {
-  font-family: "Lobster", cursive;
-  font-family: "Playfair Display", serif;
+  font-family: 'Lobster', cursive;
+  font-family: 'Playfair Display', serif;
 }
 
 body {
@@ -12,81 +12,120 @@ body {
   margin-top: 12px;
 }
 
+.container {
+  margin-top: 100px;
+}
 
-   /* Style for locations container */
-   #locations-container {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f8f8f8;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f9f9f9;
-    padding: 10px;
-  }
+#ingredients {
+  margin: 0 auto 0 auto;
+  text-align: center;
+  font-size: 80%;
+  font-size: 'Playfair Display', serif;
+  display: inline;
+}
 
-  /* Style for pagination container */
-  #pagination-container {
-    margin-top: 20px;
-    text-align: center;
-    font-size: large;
-    padding: 10px;
-    margin: 10px
-    }
+.section {
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  color: hsl(206, 17%, 28%);
+  margin: 0 auto;
+  max-width: 80%;
+  background-color: hsla(8, 89%, 21%, 0.702);
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
-  .pagination-button {
-    display: inline-block;
-    margin: 5px;
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    cursor: pointer;
-  }
+.title {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
 
-  .pagination-button:hover {
-    background-color: #e8e8e8;
-  }
+.ingredients {
+  color: white;
+  margin-top: 0;
+  font-size: 2rem;
+}
+#instructions {
+  display: block;
+  text-size-adjust: 80%;
+  text-align: center;
+}
 
-  .pagination-button.active {
-    background-color: #ccc;
-  }
+/* Style for locations container */
+#locations-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
 
-  .location-item {
-    margin-bottom: 20px;
-  }
-  
-  .location-item h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .location-item p {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .images-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .images-container img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
+/* Style for pagination container */
+#pagination-container {
+  margin-top: 20px;
+  text-align: center;
+  font-size: large;
+  padding: 10px;
+  margin: 10px;
+}
 
-  a {
-    color: #485fc7;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: x-large;
-    font-weight: 400;
-    padding: 3px;
-    }
+.pagination-button {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.pagination-button:hover {
+  background-color: #e8e8e8;
+}
+
+.pagination-button.active {
+  background-color: #ccc;
+}
+
+.location-item {
+  margin-bottom: 20px;
+}
+
+.location-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.location-item p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.images-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.images-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+a {
+  color: #485fc7;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: 400;
+  padding: 3px;
+}

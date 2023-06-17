@@ -66,10 +66,10 @@ window.addEventListener('load', function () {
       handleLikeButtonClick(favorites[i]);
     });
 
-    mealContainer.appendChild(resultsLikeBtn);
-
     mealContainer.classList.add('container', 'section', 'box', 'has-text-white');
     mealName.classList.add('title', 'columns', 'is-centered');
+
+    mealContainer.appendChild(resultsLikeBtn);
 
     let measurements = document.createElement('div');
     measurements.id = 'ingredients';
