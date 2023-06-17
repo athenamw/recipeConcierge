@@ -179,16 +179,17 @@ search.addEventListener('click', function () {
 
 function checkRecipeExisting(array, meal) {
   var recipeExists = false;
+  var index;
   for (var i = 0; i < array.length; i++) {
     if (array[i].idMeal == meal.idMeal) {
       recipeExists = true;
+      index = i;
     }
   }
-  return recipeExists;
+  return [recipeExists, index];
 }
 
 function changeLikeButtonIcon(likeButton) {
-  console.log(likeButton);
   if (likeButton.textContent == '😶 Like') {
     likeButton.textContent = '😋 Liked';
   } else {
@@ -198,18 +199,16 @@ function changeLikeButtonIcon(likeButton) {
 
 function handleLikeButtonClick(meal) {
   var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
-  if (checkRecipeExisting(favorite, meal)) {
-    console.log('recipe should be deleted');
+  let recipeInfo = checkRecipeExisting(favorite, meal);
+  var recipeExists = recipeInfo[0];
+  var recipeIndex = recipeInfo[1];
+  if (recipeExists) {
+    favorite.splice(recipeIndex, 1);
   } else {
-    saveRecipe(meal);
+    favorite.push(meal);
   }
-  changeLikeButtonIcon(this.event.target);
-}
-
-function saveRecipe(meal) {
-  var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
-  favorite.push(meal);
   localStorage.setItem('favorites', JSON.stringify(favorite));
+  changeLikeButtonIcon(this.event.target);
 }
 
 //window.addEventListener("load", changeLikeButtonIcon);
