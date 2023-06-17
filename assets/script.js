@@ -33,7 +33,6 @@ function getRandomRecipe() {
         for (let i = 1; i <= 20; i++) {
           var ingredientKey = 'strIngredient' + i;
           var ingredientValue = recipe[ingredientKey];
-          //console.log(ingredientValue);
           var measureKey = 'strMeasure' + i;
           var measureValue = recipe[measureKey];
           // displays the values under the photo
@@ -46,7 +45,6 @@ function getRandomRecipe() {
         // displays the instructions under the ingredients
         instructions.innerHTML = recipeInstructions;
       });
-      //addEventListenerToLikeBtns();
     }
   });
 }
@@ -67,19 +65,19 @@ function getSearchresults() {
       if (response.ok) {
         response.json().then(function (data) {
           displayRecipes(data);
-          console.log(data);
+          //console.log(data);
         });
         //will run if it cant call the api
       } else {
-        console.log('error');
+        console.log('Error: Cannot reach The Meal DB API');
       }
     })
     //will run if it cant connect to the server
     .catch(function (error) {
-      console.log('error');
+      //console.log('error');
     });
   //console logs th user input
-  console.log(input);
+  //console.log(input);
 }
 
 //will remove Recipe of the dat from the page not working yet
@@ -96,9 +94,9 @@ function displayRecipes(data) {
   dataInfo.innerHTML = '';
   // append the name to a new div
   //need to add a class to each div
-  console.log('before the for loop', data.meals.length);
+  //console.log('before the for loop', data.meals.length);
   for (let i = 0; i < data.meals.length; i++) {
-    console.log(data);
+    // console.log(data);
 
     let mealContainer = document.createElement('section');
     mealContainer.id = 'recipe ' + i;
@@ -210,15 +208,3 @@ function handleLikeButtonClick(meal) {
   localStorage.setItem('favorites', JSON.stringify(favorite));
   changeLikeButtonIcon(this.event.target);
 }
-
-//window.addEventListener("load", changeLikeButtonIcon);
-//likeBtn.addEventListener('click', handleLikeButtonClick);
-// function addEventListenerToLikeBtns() {
-//   const likeBtns = document.querySelectorAll('.like-button');
-//   for (var i = 0; i < likeBtns.length; i++) {
-//     likeBtns[i].addEventListener('click', () => {
-//       handleLikeButtonClick(likeBtns[i].getAttribute('data-mealId'));
-//     });
-//   }
-// }
-// document.querySelector('#carl').getAttribute('data-cowabunga');
