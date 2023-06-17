@@ -1,6 +1,7 @@
 const randomRecipeApi = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const search = document.getElementById('searchBtn');
 var input = document.getElementById('searchText').value;
+var searchTextBox = document.getElementById('searchText');
 const dailyBtn = document.getElementById('daily');
 const randomDaily = document.getElementById('randomRecipe');
 var recipeName = document.getElementById('recipeName');
@@ -173,6 +174,13 @@ function displayRecipes(data) {
 search.addEventListener('click', function () {
   removeRecipeDay();
   getSearchresults();
+});
+// allows enter button to be pressed on search content
+searchTextBox.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    removeRecipeDay();
+    getSearchresults();
+  }
 });
 
 function checkRecipeExisting(array, meal) {
