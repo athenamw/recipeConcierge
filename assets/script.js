@@ -132,7 +132,6 @@ function displayRecipes(data) {
     let instructions = document.createElement('div');
     instructions.id = 'instructions';
     instructions.classList.add('instructions', 'has-text-white');
-
     mealName.textContent = data.meals[i].strMeal;
     mealContainer.appendChild(mealName);
     //add like button

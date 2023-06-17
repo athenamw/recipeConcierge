@@ -8,7 +8,7 @@ body {
   background-size: 100% vh;
 }
 #searchText{
-  width: 30%;
+  width: 40%;
   font-size: 20px;
 }
 
@@ -52,6 +52,8 @@ body {
 }
 
 .section {
+  display: flex;
+  flex-wrap: wrap;
   border-radius: 5px;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
@@ -64,24 +66,28 @@ body {
 }
 
 .title {
+  flex-basis: 100%;
   color: white;
   font-size: 2rem;
   font-weight: bold;
+  
 }
 
 .image {
-  float: left;
-  max-width: 70%;
+  flex-basis: 50%;
+  max-width: 50%;
   max-height: 50%;
   display: inline; 
   margin: 0 auto;
 }
 .ingredients{
+  flex-basis: 50%;
   color: white;
   margin-top: 0;
   font-size: 2rem;
 }
 #instructions{
+  flex-basis: 100%;
   display: block;
   text-size-adjust: 80%;
   text-align: center;
