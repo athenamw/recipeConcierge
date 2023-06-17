@@ -117,7 +117,7 @@ function displayRecipes(data) {
     });
 
     mealContainer.appendChild(resultsLikeBtn);
-    mealContainer.classList.add('class=container', 'section', 'box', 'has-text-white');
+    mealContainer.classList.add('container', 'section', 'box', 'has-text-white');
     mealName.classList.add('title', 'columns', 'is-centered');
     // create the p element for the recipe
     let measurements = document.createElement('div');
