@@ -79,8 +79,12 @@ window.addEventListener('load', function () {
     image.src = pic;
     image.alt = 'Meal Photograph';
 
-    let instructions = document.createElement('p');
+    let instructions = document.createElement('button');
     instructions.id = 'instructions';
+    instructions.classList.add('accordion', 'button', 'is-light', 'm-4');
+    instructions.textContent = 'Instructions';
+    let instructionsText = document.createElement('section');
+    instructionsText.classList.add('panel');
 
     mealName.textContent = recName;
     mealContainer.appendChild(mealName);
@@ -116,10 +120,12 @@ window.addEventListener('load', function () {
         measurements.appendChild(ingredientContainer);
       }
     }
-    instructions.innerHTML = 'Instructions<br>' + favorites[i].strInstructions.replaceAll('\r\n', '<br>');
+    instructionsText.innerHTML = '<br>' + favorites[i].strInstructions.replaceAll('\r\n', '<br>');
     mealContainer.appendChild(measurements);
     mealContainer.appendChild(instructions);
+    mealContainer.appendChild(instructionsText);
 
+    // instructions.addEventListener('click', handleAccordionClick(instructions));
     mealDiv.append(mealContainer);
     favoritesSection.append(mealDiv);
   }
@@ -135,6 +141,33 @@ window.addEventListener('load', function () {
     hideFindStoresButton();
   }
 });
+
+// function handleAccordionClick(accordion) {
+//   accordion.classList.toggle('active');
+//   var panel = accordion.nextElementSibling;
+//   if (panel.style.maxHeight) {
+//     panel.style.maxHeight = null;
+//   } else {
+//     panel.style.maxHeight = panel.scrollHeight + 'px';
+//   }
+// }
+
+var acc = document.getElementsByClassName('accordion');
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener('click', function () {
+    this.classList.toggle('active');
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.display = 'none';
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.display = 'block';
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+}
 
 function updateSelectedIngredients() {
   var selectedIngredients = getSelectedIngredients();
