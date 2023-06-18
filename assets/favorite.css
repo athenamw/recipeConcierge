@@ -3,9 +3,10 @@
   font-family: 'Playfair Display', serif;
 }
 
+html,
 body {
   background-image: url(./bread.png);
-  background-size: cover;
+  background-size: 100% vh;
 }
 
 .header {
