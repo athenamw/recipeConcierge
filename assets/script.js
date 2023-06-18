@@ -26,9 +26,8 @@ function getRandomRecipe() {
         img.src = recipe.strMealThumb;
         var ingredientList = recipe.strMeasure;
         var measure = recipe.strIngredient;
-        var likeButton = document.getElementById('like-button');
-        likeButton.setAttribute('data-mealId', recipe.idMeal);
-        likeButton.addEventListener('click', function () {
+        likeBtn.textContent = getLikeButtonTextContent(recipe);
+        likeBtn.addEventListener('click', function () {
           handleLikeButtonClick(recipe);
         });
         // loop for getting the measurement and the ingredients paired up
@@ -107,17 +106,14 @@ function displayRecipes(data) {
     let mealName = document.createElement('h2');
     mealName.id = 'recipe-name ' + i;
     let resultsLikeBtn = document.createElement('a');
-    resultsLikeBtn.id = 'resultsLikeBtn' + i;
-    resultsLikeBtn.textContent = '😶 Like';
-    resultsLikeBtn.classList.add('like-button', 'button', 'is-light', 'm-4');
-
-    resultsLikeBtn.setAttribute('data-mealId', data.meals[i].idMeal);
+    resultsLikeBtn.textContent = getLikeButtonTextContent(data.meals[i]);
+    resultsLikeBtn.classList.add('button', 'is-light', 'm-4');
     resultsLikeBtn.addEventListener('click', function () {
       handleLikeButtonClick(data.meals[i]);
     });
 
     mealContainer.appendChild(resultsLikeBtn);
-    mealContainer.classList.add('class=container', 'section', 'box', 'has-text-white');
+    mealContainer.classList.add('container', 'section', 'box', 'has-text-white');
     mealName.classList.add('title', 'columns', 'is-centered');
     // create the p element for the recipe
     let measurements = document.createElement('div');
@@ -222,4 +218,15 @@ function handleLikeButtonClick(meal) {
   }
   localStorage.setItem('favorites', JSON.stringify(favorite));
   changeLikeButtonIcon(this.event.target);
+}
+
+function getLikeButtonTextContent(meal) {
+  var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
+  let recipeInfo = checkRecipeExisting(favorite, meal);
+  var recipeExists = recipeInfo[0];
+  if (recipeExists) {
+    return '😋 Liked';
+  } else {
+    return '😶 Like';
+  }
 }
