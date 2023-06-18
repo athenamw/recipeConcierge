@@ -46,7 +46,24 @@ function getLikeButtonTextContent(meal) {
   }
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('load', windowLoadEvent);
+
+async function windowLoadEvent() {
+  await loadFavorites();
+  await setAccordionEventListeners();
+  // Load the selected ingredients from local storage
+  loadSelectedIngredients();
+
+  // Check if any ingredient is selected and show/hide the "Find Stores" button
+  var selectedIngredients = getSelectedIngredients();
+  if (selectedIngredients.length > 0) {
+    showFindStoresButton();
+  } else {
+    hideFindStoresButton();
+  }
+}
+
+async function loadFavorites() {
   var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   var favoritesSection = document.getElementById('favMini');
   for (let i = 0; i < favorites.length; i++) {
@@ -129,44 +146,25 @@ window.addEventListener('load', function () {
     mealDiv.append(mealContainer);
     favoritesSection.append(mealDiv);
   }
+}
 
-  // Load the selected ingredients from local storage
-  loadSelectedIngredients();
+async function setAccordionEventListeners() {
+  var acc = document.getElementsByClassName('accordion');
+  var i;
 
-  // Check if any ingredient is selected and show/hide the "Find Stores" button
-  var selectedIngredients = getSelectedIngredients();
-  if (selectedIngredients.length > 0) {
-    showFindStoresButton();
-  } else {
-    hideFindStoresButton();
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function () {
+      this.classList.toggle('active');
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.display = 'none';
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.display = 'block';
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
   }
-});
-
-// function handleAccordionClick(accordion) {
-//   accordion.classList.toggle('active');
-//   var panel = accordion.nextElementSibling;
-//   if (panel.style.maxHeight) {
-//     panel.style.maxHeight = null;
-//   } else {
-//     panel.style.maxHeight = panel.scrollHeight + 'px';
-//   }
-// }
-
-var acc = document.getElementsByClassName('accordion');
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener('click', function () {
-    this.classList.toggle('active');
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.display = 'none';
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.display = 'block';
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    }
-  });
 }
 
 function updateSelectedIngredients() {
