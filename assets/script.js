@@ -10,6 +10,7 @@ var ingredients = document.getElementById('ingredients');
 var instructions = document.getElementById('instructionsText');
 var randomContainer = document.getElementById('container');
 var likeBtn = document.getElementById('like-button');
+let dataInfo = document.getElementById('data');
 
 function getRandomRecipe() {
   changeLikeButtonIcon('unlike');
@@ -80,10 +81,12 @@ function getSearchresults() {
   //console.log(input);
 }
 
-//will remove Recipe of the dat from the page not working yet
+//will remove Recipe of the day and button from the page
 function removeRecipeDay() {
   randomContainer.innerHTML = '.removeRecipeDay {display: none; }';
   document.head.appendChild(randomContainer);
+  dailyBtn.classList.add("removeRandomRecipeBtm");
+
 }
 
 //will display the title when the user clicks the submit button
@@ -128,9 +131,11 @@ function displayRecipes(data) {
     let instructions = document.createElement('div');
     instructions.id = 'instructions';
     instructions.classList.add('instructions', 'has-text-white');
-
     mealName.textContent = data.meals[i].strMeal;
     mealContainer.appendChild(mealName);
+    //add like button
+    //mealContainer.appendChild(likeBtn);
+
 
     image.textContent = data.meals[i].strMealThumb;
     // appends the image to container
@@ -165,6 +170,8 @@ function displayRecipes(data) {
     dataInfo.append(mealDiv);
   }
 }
+
+
 
 // this is event listener for like button on the random recipe section
 search.addEventListener('click', function () {
