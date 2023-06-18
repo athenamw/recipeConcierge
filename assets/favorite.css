@@ -17,11 +17,13 @@ body {
 }
 
 #ingredients {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin: 0 auto 0 auto;
   text-align: center;
   font-size: 80%;
   font-size: 'Playfair Display', serif;
-  display: inline;
 }
 
 .section {
