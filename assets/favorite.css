@@ -82,15 +82,12 @@ body {
 }
 
 /* Style for locations container */
-/* #locations-container {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px;
-} */
+#locations-container {
+  background-color: darkolivegreen;
+  font-size: 80%;
+  font-size: 'Playfair Display', serif;
+  color: white;
+}
 
 /* Style for pagination container */
 #pagination-container {
