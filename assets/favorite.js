@@ -74,6 +74,7 @@ async function loadFavorites() {
 
     let mealContainer = document.createElement('section');
     mealContainer.id = 'recipe ' + i;
+    mealContainer.style.height = '100%';
     let mealName = document.createElement('h2');
     mealName.id = 'recName ' + i;
     let resultsLikeBtn = document.createElement('a');
@@ -88,7 +89,7 @@ async function loadFavorites() {
 
     mealContainer.appendChild(resultsLikeBtn);
 
-    let measurements = document.createElement('div');
+    let measurements = document.createElement('section');
     measurements.id = 'ingredients';
 
     let image = document.createElement('img');
@@ -115,7 +116,7 @@ async function loadFavorites() {
       var measureKey = 'strMeasure' + j;
       var measureValue = favorites[i][measureKey];
       if (ingredientValue && measureValue) {
-        let ingredientContainer = document.createElement('div');
+        let ingredientContainer = document.createElement('section');
 
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -185,6 +186,7 @@ function showFindStoresButton() {
     // Create the "Find Stores" button
     findStoresBtn = document.createElement('button');
     findStoresBtn.id = 'findStoresBtn';
+    findStoresBtn.classList.add('button', 'is-light', 'm-4');
     findStoresBtn.textContent = 'Find Stores';
 
     // Add event listener for button click
@@ -292,7 +294,7 @@ function initMap(selectedIngredients) {
           // for (let i = 0; i < results.length; i++) {
           displaySearchResults(flattenResultsArray);
           // createMarker(results[i], map);
-          // const locationItem = document.createElement("div");
+          // const locationItem = document.createElement("section");
           // locationItem.textContent = results[i].name;
           // locationsContainer.appendChild(locationItem);
           // }
@@ -352,12 +354,12 @@ function displaySearchResults(results, pagination) {
   locationsContainer.innerHTML = ''; // Clear the container before adding new results
 
   results.forEach(function (place, index) {
-    var locationItem = document.createElement('div');
+    var locationItem = document.createElement('section');
     locationItem.classList.add('location-item');
-    locationItem.dataset.page = Math.floor(index / 5);
+    locationItem.dataset.page = Math.floor(index / 6);
     locationItem.style.display = 'none';
     // Create an image container
-    var imageContainer = document.createElement('div');
+    var imageContainer = document.createElement('section');
     imageContainer.classList.add('image-container');
 
     // Create an image element
@@ -367,7 +369,7 @@ function displaySearchResults(results, pagination) {
     imageContainer.appendChild(image);
 
     // Create a details container
-    var detailsContainer = document.createElement('div');
+    var detailsContainer = document.createElement('section');
     detailsContainer.classList.add('details-container');
 
     // Create a title element
@@ -397,7 +399,7 @@ function displaySearchResults(results, pagination) {
   paginationContainer.innerHTML = '';
 
   // pagination.forEach(function (page) {
-  for (let i = 0; i <= Math.floor(results.length / 5); i++) {
+  for (let i = 0; i <= Math.floor(results.length / 6); i++) {
     var pageLink = document.createElement('a');
     pageLink.href = '#';
     pageLink.textContent = i + 1;

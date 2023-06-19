@@ -28,6 +28,18 @@ body {
 
 .container {
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#locations-container,
+#favMini {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
 }
 
 #ingredients {
@@ -70,18 +82,15 @@ body {
 }
 
 /* Style for locations container */
-#locations-container {
+/* #locations-container {
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f8f8f8;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #f9f9f9;
   padding: 10px;
-}
+} */
 
 /* Style for pagination container */
 #pagination-container {
@@ -148,10 +157,8 @@ a {
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-  background-color: #eee;
-  color: #444;
+  margin-top: auto;
   cursor: pointer;
-  /* padding: 18px; */
   width: 100%;
   text-align: left;
   border: none;
@@ -159,16 +166,8 @@ a {
   transition: 0.4s;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active,
-.accordion:hover {
-  background-color: #ccc;
-}
-
 /* Style the accordion panel. Note: hidden by default */
 .panel {
-  /* padding: 0 18px; */
-  /* background-color: white; */
   display: none;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
