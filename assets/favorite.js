@@ -63,6 +63,18 @@ async function windowLoadEvent() {
   }
 }
 
+  // Find the location input element
+  var locationInput = document.getElementById('location-input');
+
+  // Check if the element exists before accessing its value
+  if (locationInput) {
+    var locationValue = locationInput.value;
+    console.log(locationValue);
+    // Rest of your code that relies on the location value
+  } else {
+    console.error("Element with ID 'location-input' not found.");
+  }
+
 async function loadFavorites() {
   var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   var favoritesSection = document.getElementById('favMini');
@@ -290,18 +302,18 @@ function initMap(selectedIngredients) {
 
           locationsContainer.innerHTML = ''; // Clear previous results
           const flattenResultsArray = resultsArray.flat();
-          // resultsArray.forEach((results) => {
-          // for (let i = 0; i < results.length; i++) {
           displaySearchResults(flattenResultsArray);
-          // createMarker(results[i], map);
-          // const locationItem = document.createElement("section");
-          // locationItem.textContent = results[i].name;
-          // locationsContainer.appendChild(locationItem);
-          // }
-          // });
         })
         .catch((error) => {
+          displayError(error.message);
           console.log('Error:', error);
+          const errorContainer = document.getElementById('error-container');
+          if (!errorContainer) {
+            console.log("Error: 'error-container' element not found.");
+            return;
+          }
+          errorContainer.innerHTML = 'Failed to identify the location. Please try again.';
+          console.log('Failed to identify the location. Please try again.');
         });
     },
     (error) => {
@@ -324,13 +336,23 @@ function createMarker(place, map) {
   });
 }
 
+
+function displayError(message) {
+  const errorContainer = document.getElementById('error-container');
+  const errorMessage = document.getElementById('error-message');
+  
+  errorMessage.textContent = message;
+  errorContainer.style.display = 'block';
+}
+
+
 // Find the location input element
 var locationInput = document.getElementById('location-input');
 
 // Check if the element exists before accessing its value
 if (locationInput) {
-  var location = locationInput.value;
-  console.log(location);
+  var locationValue = locationInput.value;
+  console.log(locationValue);
   // Rest of your code that relies on the location value
 } else {
   console.error("Element with ID 'location-input' not found.");
