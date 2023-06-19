@@ -18,20 +18,26 @@
         <a href="./index.html" class="homeLink is-size-3 has-text-black"> &#x1F3E0;Home </a>
       </header>
 
-      <section id="buttonContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 1"></section>
+      <section id="buttonContainer"></section>
       <section class="columns is-3 is-multi-line" id="favMini"></section>
       <section id="map"></section>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV5hVdqw7aeWJDh9p9b8vjlK4kfzbhPs8&libraries=places" async defer></script>
       <script src="./assets/favorite.js" async></script>
     </section>
 
-    <section id="locations-container"></section>
-    <section id="pagination-container"></section>
-    <section id="location-item"></section>
-    <section id="image-container"></section>
-    <section id="details-container"></section>
-    <div id="error-container">
-      <p id="error-message"></p>
-    </div>
-   </body>
+    <section class="container">
+      <section id="locations-container" class="container columns is-3 is-multi-line"></section>
+      <section id="pagination-container"></section>
+      <section id="location-item"></section>
+      <section id="image-container"></section>
+      <section id="details-container"></section>
+      <article class="message is-danger" id="error-container">
+        <section class="message-header">
+          <p>Oops!</p>
+          <button class="delete" aria-label="delete"></button>
+        </section>
+        <section class="message-body">Sorry, we were unable to find local stores for your item at this time.</section>
+      </article>
+    </section>
+  </body>
 </html>
