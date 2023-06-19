@@ -10,6 +10,7 @@ var ingredients = document.getElementById('ingredients');
 var instructions = document.getElementById('instructionsText');
 var randomContainer = document.getElementById('container');
 var likeBtn = document.getElementById('like-button');
+let dataInfo = document.getElementById('data');
 
 function getRandomRecipe() {
   changeLikeButtonIcon('unlike');
@@ -25,9 +26,8 @@ function getRandomRecipe() {
         img.src = recipe.strMealThumb;
         var ingredientList = recipe.strMeasure;
         var measure = recipe.strIngredient;
-        var likeButton = document.getElementById('like-button');
-        likeButton.setAttribute('data-mealId', recipe.idMeal);
-        likeButton.addEventListener('click', function () {
+        likeBtn.textContent = getLikeButtonTextContent(recipe);
+        likeBtn.addEventListener('click', function () {
           handleLikeButtonClick(recipe);
         });
         // loop for getting the measurement and the ingredients paired up
@@ -81,10 +81,12 @@ function getSearchresults() {
   //console.log(input);
 }
 
-//will remove Recipe of the dat from the page not working yet
+//will remove Recipe of the day and button from the page
 function removeRecipeDay() {
   randomContainer.innerHTML = '.removeRecipeDay {display: none; }';
   document.head.appendChild(randomContainer);
+  dailyBtn.classList.add("removeRandomRecipeBtm");
+
 }
 
 //will display the title when the user clicks the submit button
@@ -104,17 +106,14 @@ function displayRecipes(data) {
     let mealName = document.createElement('h2');
     mealName.id = 'recipe-name ' + i;
     let resultsLikeBtn = document.createElement('a');
-    resultsLikeBtn.id = 'resultsLikeBtn' + i;
-    resultsLikeBtn.textContent = '😶 Like';
-    resultsLikeBtn.classList.add('like-button', 'button', 'is-light', 'm-4');
-
-    resultsLikeBtn.setAttribute('data-mealId', data.meals[i].idMeal);
+    resultsLikeBtn.textContent = getLikeButtonTextContent(data.meals[i]);
+    resultsLikeBtn.classList.add('button', 'is-light', 'm-4');
     resultsLikeBtn.addEventListener('click', function () {
       handleLikeButtonClick(data.meals[i]);
     });
 
     mealContainer.appendChild(resultsLikeBtn);
-    mealContainer.classList.add('class=container', 'section', 'box', 'has-text-white');
+    mealContainer.classList.add('container', 'section', 'box', 'has-text-white');
     mealName.classList.add('title', 'columns', 'is-centered');
     // create the p element for the recipe
     let measurements = document.createElement('div');
@@ -132,9 +131,11 @@ function displayRecipes(data) {
     let instructions = document.createElement('div');
     instructions.id = 'instructions';
     instructions.classList.add('instructions', 'has-text-white');
-
     mealName.textContent = data.meals[i].strMeal;
     mealContainer.appendChild(mealName);
+    //add like button
+    //mealContainer.appendChild(likeBtn);
+
 
     image.textContent = data.meals[i].strMealThumb;
     // appends the image to container
@@ -169,6 +170,8 @@ function displayRecipes(data) {
     dataInfo.append(mealDiv);
   }
 }
+
+
 
 // this is event listener for like button on the random recipe section
 search.addEventListener('click', function () {
@@ -215,4 +218,15 @@ function handleLikeButtonClick(meal) {
   }
   localStorage.setItem('favorites', JSON.stringify(favorite));
   changeLikeButtonIcon(this.event.target);
+}
+
+function getLikeButtonTextContent(meal) {
+  var favorite = JSON.parse(localStorage.getItem('favorites')) || [];
+  let recipeInfo = checkRecipeExisting(favorite, meal);
+  var recipeExists = recipeInfo[0];
+  if (recipeExists) {
+    return '😋 Liked';
+  } else {
+    return '😶 Like';
+  }
 }

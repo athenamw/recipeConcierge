@@ -1,5 +1,5 @@
 * {
-  font-family: "Lobster", cursive;
+  font-family: "Lobster", "cursive";
   font-family: "Playfair Display", serif;
 }
 
@@ -7,39 +7,65 @@ body {
   background-image: url(./bread.png);
   background-size: 100% vh;
 }
+#searchText{
+  width: 40%;
+  font-size: 20px;
+}
 
 #ingredients {
-  margin-top: 5%;
+  margin-top:0;
 }
 
 .daily {
   margin-left: 300px;
 }
+.random-image{
+  max-width: 80%;
+
+}
 .image {
   display: grid;
   margin-left: 300px;
 }
-header {
+.header {
+  margin-top: .01px;
   text-shadow: 1px 2px 2px gray;
 }
 
 #topBar {
   z-index: 1;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto; 
+  margin-right: auto;
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+#searchText,
+#searchBtn,
+#daily,
+.favLink {
+  margin: 2px;
 }
 .container{
-  margin-top: 100px;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-top: 50px;
 }
 
 #ingredients{
   margin: 0 auto 0 auto;
   text-align: center;
-  font-size: 80%;
+  font-size: 100%;
   font-size: "Playfair Display", serif;
   display: inline;
 }
 
 .section {
+  display: flex;
+  flex-wrap: wrap;
   border-radius: 5px;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
@@ -52,30 +78,35 @@ header {
 }
 
 .title {
+  flex-basis: 100%;
   color: white;
   font-size: 2rem;
   font-weight: bold;
+  
 }
 
 .image {
-  float: left;
-  width: 70%;
-  height: auto;
+  flex-basis: 50%;
+  max-width: 50%;
+  max-height: 50%;
   display: inline; 
   margin: 0 auto;
 }
 .ingredients{
-  color: white;
+  flex-basis: 50%;
   margin-top: 0;
-  font-size: 2rem;
+  font-size: 20px;
 }
 #instructions{
+  flex-basis: 100%;
   display: block;
   text-size-adjust: 80%;
   text-align: center;
-
+  font-size: 100%
 }
-
 .tags {
   margin-top: 1rem;
+}
+.removeRandomRecipeBtm{
+  display: none;
 }
