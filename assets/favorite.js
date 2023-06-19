@@ -63,23 +63,23 @@ async function windowLoadEvent() {
   }
 }
 
-  // Find the location input element
-  var locationInput = document.getElementById('location-input');
+// Find the location input element
+var locationInput = document.getElementById('location-input');
 
-  // Check if the element exists before accessing its value
-  if (locationInput) {
-    var locationValue = locationInput.value;
-    console.log(locationValue);
-    // Rest of your code that relies on the location value
-  } else {
-    console.error("Element with ID 'location-input' not found.");
-  }
+// Check if the element exists before accessing its value
+if (locationInput) {
+  var locationValue = locationInput.value;
+  // console.log(locationValue);
+  // Rest of your code that relies on the location value
+} else {
+  console.error("Element with ID 'location-input' not found.");
+}
 
 async function loadFavorites() {
   var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   var favoritesSection = document.getElementById('favMini');
   for (let i = 0; i < favorites.length; i++) {
-    console.log(favorites[i]);
+    // console.log(favorites[i]);
     var recName = favorites[i].strMeal;
     var pic = favorites[i].strMealThumb;
     let mealDiv = document.createElement('section');
@@ -207,7 +207,7 @@ function showFindStoresButton() {
       storeSelectedIngredients(selectedIngredients);
       initMap(selectedIngredients);
       var searchTerm = document.getElementById('location-input').value;
-      console.log(searchTerm);
+      // console.log(searchTerm);
       searchRecipes(searchTerm);
 
       // Load the Google Maps API asynchronously
@@ -305,15 +305,9 @@ function initMap(selectedIngredients) {
           displaySearchResults(flattenResultsArray);
         })
         .catch((error) => {
-          displayError(error.message);
-          console.log('Error:', error);
-          const errorContainer = document.getElementById('error-container');
-          if (!errorContainer) {
-            console.log("Error: 'error-container' element not found.");
-            return;
-          }
-          errorContainer.innerHTML = 'Failed to identify the location. Please try again.';
-          console.log('Failed to identify the location. Please try again.');
+          document.getElementById('error-container').style.display = 'block';
+          // displayError('Sorry, we were unable to find local stores for your item at this time.');
+          // console.log('Failed to identify the location. Please try again.');
         });
     },
     (error) => {
@@ -336,15 +330,17 @@ function createMarker(place, map) {
   });
 }
 
+// function displayError(message) {
+//   const errorContainer = document.getElementById('error-container');
+//   const errorMessage = document.getElementById('error-message');
 
-function displayError(message) {
-  const errorContainer = document.getElementById('error-container');
-  const errorMessage = document.getElementById('error-message');
-  
-  errorMessage.textContent = message;
-  errorContainer.style.display = 'block';
-}
+//   errorContainer.classList.add('message', 'is-danger');
+//   errorContainer.insertBefore(messageHeader, errorContainer.firstChild);
+//   errorMessage.classList.add('message-body');
 
+//   errorMessage.textContent = message;
+//   errorContainer.style.display = 'block';
+// }
 
 // Find the location input element
 var locationInput = document.getElementById('location-input');
@@ -352,7 +348,7 @@ var locationInput = document.getElementById('location-input');
 // Check if the element exists before accessing its value
 if (locationInput) {
   var locationValue = locationInput.value;
-  console.log(locationValue);
+  // console.log(locationValue);
   // Rest of your code that relies on the location value
 } else {
   console.error("Element with ID 'location-input' not found.");
@@ -365,7 +361,7 @@ function dispalyNextPage() {
     pageItem.style.display = 'none';
   });
   pageItems = document.querySelectorAll(".location-item[data-page='" + currentPage + "']");
-  console.log(pageItems, currentPage);
+  // console.log(pageItems, currentPage);
   pageItems.forEach(function (pageItem) {
     pageItem.style.display = 'block';
   });
@@ -375,11 +371,15 @@ function displaySearchResults(results, pagination) {
   var locationsContainer = document.getElementById('locations-container');
   locationsContainer.innerHTML = ''; // Clear the container before adding new results
 
+  // Hide the error container if present
+  document.getElementById('error-container').style.display = 'none';
+
   results.forEach(function (place, index) {
     var locationItem = document.createElement('section');
-    locationItem.classList.add('location-item');
+    locationItem.classList.add('location-item', 'container', 'locationSection', 'box', 'has-text-white');
     locationItem.dataset.page = Math.floor(index / 6);
     locationItem.style.display = 'none';
+    locationItem.style.height = '100%';
     // Create an image container
     var imageContainer = document.createElement('section');
     imageContainer.classList.add('image-container');
@@ -410,7 +410,7 @@ function displaySearchResults(results, pagination) {
 
     locationsContainer.appendChild(locationItem);
 
-    console.log(place);
+    // console.log(place);
   });
 
   currentPage = 0;
