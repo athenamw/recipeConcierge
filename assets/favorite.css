@@ -3,25 +3,53 @@
   font-family: 'Playfair Display', serif;
 }
 
+html,
 body {
   background-image: url(./bread.png);
-  background-size: cover;
+  background-size: 100% vh;
 }
 
 .header {
-  margin-top: 12px;
+  margin-top: 0.01px;
+  text-shadow: 1px 2px 2px gray;
+}
+
+.homeLink {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .container {
-  margin-top: 100px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#locations-container,
+#favMini {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
 }
 
 #ingredients {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin: 0 auto 0 auto;
   text-align: center;
   font-size: 80%;
   font-size: 'Playfair Display', serif;
-  display: inline;
 }
 
 .section {
@@ -54,18 +82,15 @@ body {
 }
 
 /* Style for locations container */
-#locations-container {
+/* #locations-container {
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f8f8f8;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #f9f9f9;
   padding: 10px;
-}
+} */
 
 /* Style for pagination container */
 #pagination-container {
@@ -128,4 +153,34 @@ a {
   font-size: x-large;
   font-weight: 400;
   padding: 3px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  margin-top: auto;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  display: none;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: '\2796'; /* Unicode character for "minus" sign (-) */
 }
