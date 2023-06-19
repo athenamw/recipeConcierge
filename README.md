@@ -24,6 +24,7 @@ Please note that in order to utilize the "Find Stores" function on the favorites
 
 
 ## Credits
+[Presentation PowerPoint](https://docs.google.com/presentation/d/e/2PACX-1vSjjxAaxKzJxzmkzYKNxcwZufSkcIIGIFUlovyMsSvSn-fseZ9GO8XqJmfcnhlhOQ/pub?start=true&loop=true&delayms=10000)
 
 Creators of this project are:
 
