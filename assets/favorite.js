@@ -46,7 +46,36 @@ function getLikeButtonTextContent(meal) {
   }
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('load', windowLoadEvent);
+
+async function windowLoadEvent() {
+  await loadFavorites();
+  await setAccordionEventListeners();
+  // Load the selected ingredients from local storage
+  loadSelectedIngredients();
+
+  // Check if any ingredient is selected and show/hide the "Find Stores" button
+  var selectedIngredients = getSelectedIngredients();
+  if (selectedIngredients.length > 0) {
+    showFindStoresButton();
+  } else {
+    hideFindStoresButton();
+  }
+}
+
+  // Find the location input element
+  var locationInput = document.getElementById('location-input');
+
+  // Check if the element exists before accessing its value
+  if (locationInput) {
+    var locationValue = locationInput.value;
+    console.log(locationValue);
+    // Rest of your code that relies on the location value
+  } else {
+    console.error("Element with ID 'location-input' not found.");
+  }
+
+async function loadFavorites() {
   var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   var favoritesSection = document.getElementById('favMini');
   for (let i = 0; i < favorites.length; i++) {
@@ -57,6 +86,7 @@ window.addEventListener('load', function () {
 
     let mealContainer = document.createElement('section');
     mealContainer.id = 'recipe ' + i;
+    mealContainer.style.height = '100%';
     let mealName = document.createElement('h2');
     mealName.id = 'recName ' + i;
     let resultsLikeBtn = document.createElement('a');
@@ -71,7 +101,7 @@ window.addEventListener('load', function () {
 
     mealContainer.appendChild(resultsLikeBtn);
 
-    let measurements = document.createElement('div');
+    let measurements = document.createElement('section');
     measurements.id = 'ingredients';
 
     let image = document.createElement('img');
@@ -79,8 +109,12 @@ window.addEventListener('load', function () {
     image.src = pic;
     image.alt = 'Meal Photograph';
 
-    let instructions = document.createElement('p');
+    let instructions = document.createElement('button');
     instructions.id = 'instructions';
+    instructions.classList.add('accordion', 'button', 'is-light', 'm-4');
+    instructions.textContent = 'Instructions';
+    let instructionsText = document.createElement('section');
+    instructionsText.classList.add('panel');
 
     mealName.textContent = recName;
     mealContainer.appendChild(mealName);
@@ -94,7 +128,7 @@ window.addEventListener('load', function () {
       var measureKey = 'strMeasure' + j;
       var measureValue = favorites[i][measureKey];
       if (ingredientValue && measureValue) {
-        let ingredientContainer = document.createElement('div');
+        let ingredientContainer = document.createElement('section');
 
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -116,25 +150,35 @@ window.addEventListener('load', function () {
         measurements.appendChild(ingredientContainer);
       }
     }
-    instructions.innerHTML = 'Instructions<br>' + favorites[i].strInstructions.replaceAll('\r\n', '<br>');
+    instructionsText.innerHTML = '<br>' + favorites[i].strInstructions.replaceAll('\r\n', '<br>');
     mealContainer.appendChild(measurements);
     mealContainer.appendChild(instructions);
+    mealContainer.appendChild(instructionsText);
 
+    // instructions.addEventListener('click', handleAccordionClick(instructions));
     mealDiv.append(mealContainer);
     favoritesSection.append(mealDiv);
   }
+}
 
-  // Load the selected ingredients from local storage
-  loadSelectedIngredients();
+async function setAccordionEventListeners() {
+  var acc = document.getElementsByClassName('accordion');
+  var i;
 
-  // Check if any ingredient is selected and show/hide the "Find Stores" button
-  var selectedIngredients = getSelectedIngredients();
-  if (selectedIngredients.length > 0) {
-    showFindStoresButton();
-  } else {
-    hideFindStoresButton();
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function () {
+      this.classList.toggle('active');
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.display = 'none';
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.display = 'block';
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
   }
-});
+}
 
 function updateSelectedIngredients() {
   var selectedIngredients = getSelectedIngredients();
@@ -154,6 +198,7 @@ function showFindStoresButton() {
     // Create the "Find Stores" button
     findStoresBtn = document.createElement('button');
     findStoresBtn.id = 'findStoresBtn';
+    findStoresBtn.classList.add('button', 'is-light', 'm-4');
     findStoresBtn.textContent = 'Find Stores';
 
     // Add event listener for button click
@@ -257,18 +302,18 @@ function initMap(selectedIngredients) {
 
           locationsContainer.innerHTML = ''; // Clear previous results
           const flattenResultsArray = resultsArray.flat();
-          // resultsArray.forEach((results) => {
-          // for (let i = 0; i < results.length; i++) {
           displaySearchResults(flattenResultsArray);
-          // createMarker(results[i], map);
-          // const locationItem = document.createElement("div");
-          // locationItem.textContent = results[i].name;
-          // locationsContainer.appendChild(locationItem);
-          // }
-          // });
         })
         .catch((error) => {
+          displayError(error.message);
           console.log('Error:', error);
+          const errorContainer = document.getElementById('error-container');
+          if (!errorContainer) {
+            console.log("Error: 'error-container' element not found.");
+            return;
+          }
+          errorContainer.innerHTML = 'Failed to identify the location. Please try again.';
+          console.log('Failed to identify the location. Please try again.');
         });
     },
     (error) => {
@@ -291,13 +336,23 @@ function createMarker(place, map) {
   });
 }
 
+
+function displayError(message) {
+  const errorContainer = document.getElementById('error-container');
+  const errorMessage = document.getElementById('error-message');
+  
+  errorMessage.textContent = message;
+  errorContainer.style.display = 'block';
+}
+
+
 // Find the location input element
 var locationInput = document.getElementById('location-input');
 
 // Check if the element exists before accessing its value
 if (locationInput) {
-  var location = locationInput.value;
-  console.log(location);
+  var locationValue = locationInput.value;
+  console.log(locationValue);
   // Rest of your code that relies on the location value
 } else {
   console.error("Element with ID 'location-input' not found.");
@@ -321,12 +376,12 @@ function displaySearchResults(results, pagination) {
   locationsContainer.innerHTML = ''; // Clear the container before adding new results
 
   results.forEach(function (place, index) {
-    var locationItem = document.createElement('div');
+    var locationItem = document.createElement('section');
     locationItem.classList.add('location-item');
-    locationItem.dataset.page = Math.floor(index / 5);
+    locationItem.dataset.page = Math.floor(index / 6);
     locationItem.style.display = 'none';
     // Create an image container
-    var imageContainer = document.createElement('div');
+    var imageContainer = document.createElement('section');
     imageContainer.classList.add('image-container');
 
     // Create an image element
@@ -336,7 +391,7 @@ function displaySearchResults(results, pagination) {
     imageContainer.appendChild(image);
 
     // Create a details container
-    var detailsContainer = document.createElement('div');
+    var detailsContainer = document.createElement('section');
     detailsContainer.classList.add('details-container');
 
     // Create a title element
@@ -366,7 +421,7 @@ function displaySearchResults(results, pagination) {
   paginationContainer.innerHTML = '';
 
   // pagination.forEach(function (page) {
-  for (let i = 0; i <= Math.floor(results.length / 5); i++) {
+  for (let i = 0; i <= Math.floor(results.length / 6); i++) {
     var pageLink = document.createElement('a');
     pageLink.href = '#';
     pageLink.textContent = i + 1;

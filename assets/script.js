@@ -85,8 +85,7 @@ function getSearchresults() {
 function removeRecipeDay() {
   randomContainer.innerHTML = '.removeRecipeDay {display: none; }';
   document.head.appendChild(randomContainer);
-  dailyBtn.classList.add("removeRandomRecipeBtm");
-
+  dailyBtn.classList.add('removeRandomRecipeBtm');
 }
 
 //will display the title when the user clicks the submit button
@@ -136,7 +135,6 @@ function displayRecipes(data) {
     //add like button
     //mealContainer.appendChild(likeBtn);
 
-
     image.textContent = data.meals[i].strMealThumb;
     // appends the image to container
     mealContainer.appendChild(image);
@@ -170,8 +168,6 @@ function displayRecipes(data) {
     dataInfo.append(mealDiv);
   }
 }
-
-
 
 // this is event listener for like button on the random recipe section
 search.addEventListener('click', function () {
