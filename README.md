@@ -32,7 +32,7 @@ Creators of this project are:
 
 The APIs that we used were:
 
-- [TheMealDB](https:www.themealdb.com/api/json/v1/1/search.php?s=)
-- [GoogleMapsAPI](https://maps.googleapis.com/maps/api/js?key=AIzaSyCV5hVdqw7aeWJDh9p9b8vjlK4kfzbhPs8&libraries=places&callback=initMap)
+- [TheMealDB](https://www.themealdb.com/api.php)
+- [GoogleMapsAPI](https://developers.google.com/maps/)
 
 We also used Google for various tutorials and reference. Other people that helped with the project include: Kyle Vance, Vijay, Robbert B. Wijtman and Bia Shimizu-Reynolds.
